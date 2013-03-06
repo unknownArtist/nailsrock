@@ -396,7 +396,8 @@ form {
     border: 1px solid black;
 }
 #appointment-table td {
-    padding: 5px;
+    /*padding: 5px;*/
+    padding: 2px;
 }
 #appointment-table {
     width: 800px;
