@@ -201,15 +201,37 @@
   
 <script type="text/javascript">
 
+         $(document).ready(function() {
+          //floating menu fixing
+          var name = "#floatMenu";
+          var menuYloc = null;
+           
+          //var docHeight = $("#cardSlots").height();
+          var winheight = $(window).height();
+          
+          var docHeight = 1170;//its always this number
+            menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+            $(window).scroll(function () { 
+                    offValue = menuYloc+$(document).scrollTop();
+                    offset = menuYloc+$(document).scrollTop()+"px";
+                    if( docHeight <= $(document).scrollTop())
+                    {
+                      offset = docHeight + 300 +"px";
+                    }
+                    $(name).animate({top:offset},{duration:500,queue:false});
 
+            });
+         
+         });
+    
 
     	jQuery( '#reset' ).click(function (){
                 
                 jQuery('#appointment-form .reset').val('');
                 
         });
-
-   jQuery( '#floatMenu' ).addClass('floatMenu');
+        
+        jQuery( '#floatMenu' ).addClass('floatMenu');
 	jQuery( ".date" ).datepicker({ dateFormat: 'm-d-y' });
  
 	$(function() {
