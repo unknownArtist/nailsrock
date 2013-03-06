@@ -511,7 +511,8 @@ form {
 #floatMenu {
     border: 1px solid black;
     left: 50%;
-    margin-left: 360px;
+    /*margin-left: 360px;*/
+    margin-left: 315px; /*new chnage*/
     padding: 10px;
     width: 160px;
 }
@@ -527,7 +528,8 @@ form {
 }
 .floatMenu {
     position: absolute;
-    top: 285px;
+    /*top: 285px;*/
+    top: 510px;
 }
 .blue {
     background-color: #4FA7FF;
