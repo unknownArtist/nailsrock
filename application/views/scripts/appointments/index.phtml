@@ -206,20 +206,18 @@
           var name = "#floatMenu";
           var menuYloc = null;
            
-          //var docHeight = $("#cardSlots").height();
+          
+         
           var winheight = $(window).height();
           
-          var docHeight = 1170;//its always this number
             menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
-            $(window).scroll(function () { 
-                    offValue = menuYloc+$(document).scrollTop();
-                    offset = menuYloc+$(document).scrollTop()+"px";
-                    if( docHeight <= $(document).scrollTop())
-                    {
-                      offset = docHeight + 300 +"px";
-                    }
-                    $(name).animate({top:offset},{duration:500,queue:false});
-
+            $(window).scroll(function () {             
+                    $('#times-slots').css('float','left');            
+                    offValue = menuYloc+$(document).scrollTop();                    
+                    offset = $('#times-slots').offset().top+$('#times-slots').height()-$('#floatMenu').height() +"px";                    
+                    if(($('#times-slots').offset().top+$('#times-slots').height()) < offValue)
+                         $(name).animate({top:offset},{duration:500,queue:false});
+                
             });
          
          });
