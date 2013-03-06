@@ -1,0 +1,22 @@
+[29-Jul-2012 07:39:15] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20060613/' - /usr/local/lib/php/extensions/no-debug-non-zts-20060613/: cannot read file data: Is a directory in Unknown on line 0
+[29-Jul-2012 07:39:15] PHP Warning:  simplexml_load_file() [<a href='function.simplexml-load-file'>function.simplexml-load-file</a>]: I/O warning : failed to load external entity &quot;../data/us-states.xml&quot; in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/Bootstrap.php on line 12
+[29-Jul-2012 07:39:15] PHP Warning:  Invalid argument supplied for foreach() in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/Bootstrap.php on line 14
+[29-Jul-2012 07:39:15] PHP Fatal error:  Uncaught exception 'Zend_Session_Exception' with message 'Session must be started before any output has been sent to the browser; output started in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/Bootstrap.php/12' in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Session.php:443
+Stack trace:
+#0 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Session/Namespace.php(143): Zend_Session::start(true)
+#1 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Auth/Storage/Session.php(87): Zend_Session_Namespace->__construct('Zend_Auth')
+#2 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Auth.php(91): Zend_Auth_Storage_Session->__construct()
+#3 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Auth.php(141): Zend_Auth->getStorage()
+#4 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/layouts/scripts/header.phtml(5): Zend_Auth->hasIdentity()
+#5 /home/pledesma/public_html/admin.na in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Controller/Plugin/Broker.php on line 336
+[29-Jul-2012 07:51:41] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/local/lib/php/extensions/no-debug-non-zts-20060613/' - /usr/local/lib/php/extensions/no-debug-non-zts-20060613/: cannot read file data: Is a directory in Unknown on line 0
+[29-Jul-2012 07:51:41] PHP Warning:  simplexml_load_file() [<a href='function.simplexml-load-file'>function.simplexml-load-file</a>]: I/O warning : failed to load external entity &quot;../data/us-states.xml&quot; in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/Bootstrap.php on line 12
+[29-Jul-2012 07:51:41] PHP Warning:  Invalid argument supplied for foreach() in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/Bootstrap.php on line 14
+[29-Jul-2012 07:51:41] PHP Fatal error:  Uncaught exception 'Zend_Session_Exception' with message 'Session must be started before any output has been sent to the browser; output started in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/Bootstrap.php/12' in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Session.php:443
+Stack trace:
+#0 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Session/Namespace.php(143): Zend_Session::start(true)
+#1 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Auth/Storage/Session.php(87): Zend_Session_Namespace->__construct('Zend_Auth')
+#2 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Auth.php(91): Zend_Auth_Storage_Session->__construct()
+#3 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Auth.php(141): Zend_Auth->getStorage()
+#4 /home/pledesma/public_html/admin.nailsrock.biz/appSystem/application/layouts/scripts/header.phtml(5): Zend_Auth->hasIdentity()
+#5 /home/pledesma/public_html/admin.na in /home/pledesma/public_html/admin.nailsrock.biz/appSystem/library/Zend/Controller/Plugin/Broker.php on line 336

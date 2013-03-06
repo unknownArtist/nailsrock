@@ -1,0 +1,370 @@
+#header {margin: auto;}
+
+body { background:url(/images/nails-rock-bg.jpg);}
+#wrapper{width:900px; margin:auto;}
+h1,h3{
+    font-family:arial; 
+    font-size:18px; 
+    color: red; 
+    font-weight: bold; 
+    margin:0 0 5px 0;
+     padding:0px;}
+.clear{clear:both;}
+.viewaccount{height:500px;}
+#menu ul li {
+
+  list-style: none;
+  display: inline;
+  margin-left: 25px;
+
+}
+
+
+#contentarea{  
+    margin:auto;
+  background: #ffffff;
+  padding:30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1;
+}
+
+#operataion{  margin:auto;
+  background: #ffffff;
+  padding:30px 30px 50px 30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1;
+}
+
+
+#operataion a{ float:left; font-family:arial; font-size:14px; color:#BF7161; text-decoration:none; margin-right:80px;}
+#operataion a:hover{ color:#4c4c4c; text-decoration:underline;}
+
+#contentarea ul{margin:25px 0 0 0; padding:0px; list-style: none;}
+#contentarea li{margin:0px; padding:0px; list-style: none;}
+
+#contentarea .titlestrip{
+    background: #B64900; border:1px solid #8E2900; 
+    padding:5px 10px; color:ffffff; margin:15px 0;
+    height: 30px;
+}
+.titlestrip td {
+    text-align: center;
+}
+#contentarea .titles{float:left; 
+width:200px; 
+font-family:arial; 
+font-size:14px; 
+color: #ffffff;
+ font-weight: bold;
+  text-align: center;
+ }
+#contentarea .servicestitles{float:left; width:250px; font-family:arial; font-size:14px; color: #ffffff; font-weight: bold;}
+
+#contentarea .innercontent{ border:1px solid #E1E1E1; padding:0 15px 15px 15px; }
+
+
+
+#employee{ 
+  margin:auto;
+  background: #ffffff;
+  padding:30px 30px 50px 30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1;
+}
+
+#coupons{  margin:auto;
+  background: #ffffff;
+  padding:30px 30px 50px 30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1; min-height:60px;
+}
+
+#createac{  margin:auto;
+  background: #ffffff;
+  padding:30px 30px 50px 30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1; min-height:450px;
+}
+
+#comments{ width:600px;}
+
+#customhoursform {
+    float: left;
+    clear: both;
+}
+
+
+
+
+#checkboxes{ margin:240px 0 0 0; width:355px;}
+#checkboxes input{ width:40px;}
+
+#menu {width:700px; text-align:right;
+  margin:20px auto 20px auto;
+  padding: 1px;
+}
+
+#menu a {font-family:arial; font-size:14px; color: #BF7161; text-decoration: none; font-weight: bold;}
+#menu a:hover{ color: #4c4c4c;}
+
+
+#userName password{ margin-left: 20px;}
+
+#login {font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:70px; margin:0 0 0 90px;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#login:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+
+#AddCustomClosedDay {font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:150px !important; margin:0px;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#AddCustomClosedDay:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+
+
+
+
+#SaveHours {font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:95px !important; margin:20px 0 0 0;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#SaveHours:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+
+#file{}
+
+
+#VipMember-label{ float:left;}
+#VipMember-element{ float:none;}
+sunCloseAllDay-element{ float:left;}
+
+#back {font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:70px; margin:150px 0 0 0px;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#open {font-family:arial; font-size:12px; color: #ffffff;}
+#open input{ width:40px;}
+
+#back:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+
+#formLogin{width:400px; margin:100px auto auto auto; background: #ffffff;  padding:30px;  border-radius:7px;  box-shadow:0px 3px 10px #c1c1c1; min-height:120px;}
+
+#addServices {
+  margin:auto auto auto 0;
+  width:360px;
+  min-height:110px;
+}
+#serviceslogin {font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:70px; margin:10px 0 0 0px; text-decoration:none;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#serviceslogin:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+#addform{width:375px; margin:auto; min-height:430px;}
+
+#addServices label{float:left; font-family:arial; font-size:14px; color:#4c4c4c; width:120px; text-align:right;}
+#addServices input{float:left; margin:0px 0 7px 10px; width:220px; border:1px solid #E1E1E1; padding:5px;}
+
+label{float:left; font-family:arial; font-size:14px; color:#4c4c4c; width:120px; text-align:right;}
+select{float:left; margin:0px 0 7px 10px; width:220px; border:1px solid #E1E1E1; padding:5px;}
+
+.serviceoffer{ float:left; width:300px; font-family:arial; font-size:14px; color:#BF7161;}
+
+#editprofile{}
+#editprofile a{ float:left; font-family:arial; font-size:14px; color:#BF7161; text-decoration:none; width:212px;}
+#editprofile a:hover{ color:#4c4c4c; text-decoration:underline;}
+#editprofile .innertext{ float:left; font-family:arial; font-size:14px; color:#4c4c4c;}
+#editprofile pre{margin:0px; padding:0px; font-family:arial; font-size:14px; color:#4c4c4c; background:none;}
+
+#AddService-element{margin:0 0 0 120px;}
+#AddService-element input{ width:100px; background: #BF7161; font-family:arial; font-size:12px; color:#ffffff; font-weight: bold; border:none; border-radius: 4px; cursor:pointer;}
+#AddService-element input:hover{ background: #2F4F4F; color:#ffffff;}
+
+#Add-element{margin:0 0 0 120px;}
+#Add-element input{ width:100px; background: #BF7161; font-family:arial; font-size:12px; color:#ffffff; font-weight: bold; border:none; border-radius: 4px; cursor:pointer;}
+#Add-element input:hover{ background: #2F4F4F; color:#ffffff;}
+
+form{margin:0px; padding:0px;}
+
+#viewleft{ float:left;}
+#viewright{ float:right;}
+
+#viewright a{font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:150px; margin:0px; text-decoration:none;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#viewright a:hover { color: #ffffff !important; font-weight: bold; 
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+#editAccount{font-family:arial; font-size:12px; color: #ffffff; font-weight: bold; width:150px; margin:0px; text-decoration:none;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#editAccount:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+
+#editaccountcontent{  margin:auto; min-height:450px;
+  background: #ffffff;
+  padding:30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1;
+}
+
+#phonenumber{ margin:0 0 0 90px;}
+#accountemail{ width:200px;}
+
+#appointments{  margin:auto;
+  background: #ffffff;
+  padding:30px;
+  border-radius:7px;
+  box-shadow:0px 3px 10px #c1c1c1;
+}
+
+#appointments label{ width:150px; text-align:right; font-family:arial; font-size:13px; color:#4c4c4c;}
+
+
+#appointment-table input {
+    float: left;
+    
+}
+
+#appointment-table #memberID {
+    width: 120px;
+}
+
+
+#phCode {
+    width: 70px;
+}
+
+#members{ margin:20px 10px 20px 0; font-family:arial; font-size:12px; color:#9F9E9E;}
+#services{ margin:20px 0; font-family:arial; font-size:12px; color:#9F9E9E;}
+
+
+
+
+#addtechnitian-table {
+    float: left;
+    clear: both;
+     border: 1px solid black;
+     margin-bottom: 10px;
+}
+
+
+#addtechnitian-table td{
+  
+  width: 110px;
+  text-align: center;
+  border: 1px solid black;
+  min-height: 25px;
+ 
+}
+
+
+#addtechnitian-table input {
+    width: 80px;
+}
+
+#addtechnitian-table span {
+    float: left;
+    font-size:.8em;
+    
+}
+
+#Clear {font-family:arial; font-size:12px; color: #ffffff !important; font-weight: bold; width:70px; margin:0 0 0 110px;
+  border: none;
+  background: #BF7161;
+  padding:8px 10px;
+  border-radius: 3px;
+}
+
+#Clear:hover { color: #ffffff !important; font-weight: bold;
+  border: none;
+  background: #2F4F4F;
+  border-radius:4px;
+  color: black;
+  cursor: pointer;
+}
+
+
+
+
+
+#addTechnicians label{float:left; font-family:arial; font-size:14px; color:#4c4c4c; width:120px; text-align:right;}
+#addTechnicians input
+{float:left; margin:0px 0 7px 10px; width:100px; border:1px solid #E1E1E1; padding:5px;}
+#addTechnicians {
+  margin:auto auto auto 0;
+  width:640px;
+  min-height:110px;
+}
+#name{ width:400px;}
+
+#rewardAmmount { width: 50px;}
+

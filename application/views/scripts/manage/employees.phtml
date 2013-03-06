@@ -1,0 +1,121 @@
+<div id="wrapper">
+   <div id="operataion">
+  	<h1>Operations</h1>
+
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+
+					                        
+<a id="couponsFooter" href="/manage/coupons">Coupons</a>
+
+<a href="<?php  echo BASE_URL; ?>appointments/recentappointments">Reports</a> 
+     
+					     </div>
+  
+<div id ="contentarea" > 
+
+
+<h1>Technician Profiles</h1>
+
+
+
+
+    
+<div>
+ &nbsp;&nbsp;<a href="<?php echo $this->baseUrl() ?>/manage/add-technician"><button id="add-employee"> Add Technician  </button></a>
+
+
+</div>
+
+ <table class="sortable">
+     <thead class="titlestrip">
+<?php
+	         $rows=$this->allTechnitians;
+         if (is_array($rows)) {
+             ?>  
+             
+                <th style="text-align: center;"> <div class="titles">Technician Name</div> </th>
+                <th style="text-align: center;">  <div class="titles">Status</div> </th>
+                
+                
+
+             </thead>
+                <?php
+	       foreach ($rows as $row) {
+	           //       technicianID 	Name
+               $row=(object) $row;
+	            ?>     
+              <tr>     
+              <td style="text-align: center;"> 
+              
+         <a href="<?php echo $this->baseUrl() ?>/manage/edit-technician/technicianID/<?php  echo $row->technicianID; ?>">
+         
+           <?php  echo $row->Name; ?> </a>
+                 </td>
+              <td style="text-align: center;"> 
+              <?php  
+              
+             if ( $row->status ) {
+ ?>  
+  
+ Active
+    <?php
+
+	} else {
+ ?>    
+
+ Retired
+  <?php
+} ?> 
+                         
+              </td>
+                 </tr>
+                <?php
+	
+           }
+         }
+?>
+<tr>
+<td></td>
+<td>           
+           <a href="" onclick="history.go(-1)"> <button>Back</button> </a>
+            </td>
+</tr>
+</table>
+</div>
+	
+    <div>
+
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+function toggleChecked(status) {
+    
+    jQuery(".checkbox").each( function() {
+        
+        jQuery(this).attr("checked",status);
+})
+}
+
+
+$( "#tabs" ).tabs();
+    	jQuery( '#add-employee' ).click(function (){
+    	   jQuery( '#add-employee-dlg' ).dialog({title:'Add New Employee'});
+
+        });
+</script>

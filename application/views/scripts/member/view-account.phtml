@@ -1,0 +1,140 @@
+<div id="wrapper">
+<div id ="contentarea">
+
+<div id="viewleft">
+<h1>View Account</h1>
+
+<?php foreach($this->userdata as $data): ?>
+<?php echo "VIP Number = ". $data['vipMemberCard']; ?><br />
+<?php echo "First Name = ". $data['firstName']; ?><br />
+<?php echo "Last Name = ". $data['lastName'];?><br />
+<?php echo "email = ". $data['email'];?><br />
+<?php echo "phone = ". $data['phone'];?><br />
+<?php echo "address = ". $data['address'];?><br />
+<?php echo "city = ". $data['city'];?><br />
+<?php echo "State = ". $data['state'];?><br />
+<?php echo "ZipCode = ". $data['zip_code'];?><br />
+Vip Member =<?php  if($data["vipMember"] = '1') { echo "Yes";}else{echo "No";}
+?><br /><br />
+
+
+
+<a style="margin-right: 30px;" id="editAccount" href="
+<?php echo $this->Url(array('controller' =>'member','action'=>'edit-account',)); 
+?>">Edit account</a>
+
+
+<a style="margin-left: 30px;" id="editAccount" href="<?php echo $this->Url(
+                            array(
+                            'controller' =>  'member',
+                            'action'     =>  'delete-member',
+                            'id'         =>   $data['memberID'],
+                            )); ?>">Delete&nbsp;Member</br></a>
+
+
+
+<?php endforeach; ?><br />
+
+
+<h3>Vip Reward History</h3>
+
+<style type="text/css">
+<!--
+	#reward-table td {
+	   
+       text-align: center;
+       padding: 5px;
+	}
+-->
+</style>
+
+
+
+
+<table class="sortable" id="reward-table">
+     <thead class="titlestrip">
+        <th style="width: 50px;" > <div class="titles" style="width: 20px;">No</div> </th>
+        <th> <div class="titles">Transcation Date</div>   </th>
+      
+        <th style="width: 50px;"> <div class="titles"  style="width: 50px;">Reward&nbsp;Amount</div> </th>
+        <th> <div class="titles" style="text-align: center;">Type</div> </th>
+        
+         <th> <div class="titles">Note</div> </th>
+          <th>  <div class="titles">Operation</div> </th>
+     </thead>
+     
+<tbody>
+
+    <?php
+    
+ function USAToMySQLDate($usa_date){
+    
+	list($m,$d,$y)=explode('-',$usa_date);
+        
+      return  $date="20".$y."-".$m."-".$d;
+}
+ function MySQLToUSADate($mysql_date){
+    
+	list($y,$m,$d,)=explode('-',$mysql_date);
+        
+      return  $date=$m.'-'.$d.'-'.substr($y,-2,2);
+}
+
+    $i=1;
+     foreach($this->r_data as $reward): ?>
+    
+<tr style="margin: 5px;">
+	<td> <?php echo $i; ?></td>
+	<td> <?php    echo MySQLToUSADate( $reward['date'] ) ?>&nbsp;</td>
+	<td> <?php echo $reward['rewardPoints']?>&nbsp;</td>
+	<td> <?php echo $reward['type']?>&nbsp;</td>
+   <td>   <?php echo $reward['note']?>&nbsp;          </td>
+	<td style="text-align: center;">
+ <!--
+
+<a href="<?php echo $this->baseUrl() ?>/member/view-account/memberID/<?php  echo $reward['memberID']; ?>/rewardID/<?php  echo $reward['id']; ?>"><button>Edit</button></a>
+   
+-->   
+<a href="<?php echo $this->baseUrl() ?>/member/delete-reward/id/<?php  echo $reward['id']; ?>/memID/<?php  echo $reward['memberID']; ?>"><button>Delete</button></a>
+  
+    </td>
+
+   
+  <?php
+ 
+
+ 
+ ?>   </tr>  <?php
+ 
+ $i++;
+  endforeach; ?>
+
+
+
+</tbody>
+     
+     
+     
+     </table>
+
+
+  <?php  echo $this->paginationControl($this->r_data, 'Sliding', 'pagination.phtml'); ?>
+
+
+</div>
+
+
+
+
+<div style="clear:both;"></div>
+
+<br />
+
+<h1>Add/subtract Reward Point</h1>
+<?php echo $this->form1; ?>
+
+<br />
+
+
+</div>
+</div>

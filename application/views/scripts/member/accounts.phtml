@@ -1,0 +1,178 @@
+  <script type="text/javascript">
+  $(function(){
+
+    $("button, input[type='button']").click(function(){
+
+     // alert("hello clicked");
+      return false;
+      
+    });
+  });
+</script>
+<style type="text/css">
+.dijitReset  {
+
+   padding: 2px;
+}
+.odd {
+   background: #ccc;
+}
+
+</style>
+<div id="wrapper">
+
+  <div id="contentarea">
+  	<h1>Accounts</h1>
+    
+    <label>Customer Type</label>
+    
+    <select name="customer_type" id="customer_type" >
+         <option value="0">All</option>
+         <option value="1">VIP Customers</option>
+         <option value="3">New Customers</option>
+         <option value="2">Phone Contacts</option>
+    </select>
+    
+      <a href="<?php  echo $this->baseUrl(); ?>/member/addaccount">Add Account</a>
+
+<div id="accountsmember_table" style="float: left;">
+
+<h3>
+
+<p> Enter Name to find Account  </p>
+</h3>
+            <input type="text" name="memberID" id="memberID" class="" value="" />
+
+
+<br />
+<br />
+<script type="text/javascript">
+
+
+		$( "#memberID" ).autocomplete({
+			source: '/appointments/autocompletecustomer',
+            minLength: 1,
+			close: function( event, ui ) {
+			 
+		        var id=jQuery(this).val();
+                
+              //  alert(id);
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadcustomer/format/json/id/'+id,
+  success: function(data) {
+ // alert(""+data.memberID);
+  
+  
+self.location="http://admin.nailsrock.biz/member/view-account/memberID/"+data.memberID;
+  }
+});
+
+        
+			}
+		});
+
+</script>
+
+
+     <table class="sortable">
+     <thead class="titlestrip">
+        <th> <div class="titles">Name</div> </th>
+        <th> <div class="titles">Phone</div>   </th>
+      
+        <th> <div class="titles">Email</div> </th>
+          <th >  <div class="titles" style="width: 70px;">VIP Member</div> </th>
+           <th style="">  <div class="titles">VIP Number</div> </th>
+          
+          
+          
+     </thead>
+     
+<tbody>
+
+    <?php foreach($this->Members as $t): ?>
+    
+<tr>
+	<td style="text-align: center;"> <a href="<?php echo $this->Url(
+                            array(
+                            'controller' =>  'member',
+                            'action'     =>  'view-account',
+                            'memberID'         =>   $t['memberID'],
+                            )); ?>">
+                            
+                            
+                            
+                            <?php echo $t['firstName']." " ?></a></td>
+	<td> <?php    echo "<span id='phonenumber'>".$t['phCode']."".$t['phone']."</span>"; ?></td>
+	<td><?php    echo "<span id='accountemail'>".$t['email']."</span> "; ?></td>
+
+	<td style="text-align: center; width: 70px;">
+    <?php
+	
+    if ($t['vipMember']==1) { echo 'YES';}  else {
+        echo 'NO';
+    }
+?>
+    
+    </td>
+
+
+<td style="text-align: center;"><?php  echo $t['vipMemberCard']; ?></td>
+   
+  <?php
+ 
+
+ 
+ ?>   </tr>  <?php
+  endforeach; ?>
+
+
+
+</tbody>
+     
+     
+     
+     </table>
+</div>
+
+     
+  	<div >
+
+		
+	
+		
+
+        
+		<div class="clear"></div>
+	</div>
+	
+	<div id="editprofile">
+	<div class="accountbg"> 
+
+
+
+  </div>
+ 
+  </div>
+  <?php  echo $this->paginationControl($this->Members, 'Sliding', 'pagination.phtml'); ?>
+  </div>
+  </div>
+  <script type="text/javascript">
+<!--
+	
+    $("tr:odd").addClass("odd");
+           	jQuery( '#customer_type' ).change(function (){
+    	   
+    var customer_type=jQuery(this).val();
+    
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/member/loadaccountstable/customer_type/'+customer_type, 
+  success: function(data) {
+    jQuery('#accountsmember_table').html(data);
+
+  }
+});
+
+        });     
+        
+-->
+</script>

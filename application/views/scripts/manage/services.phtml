@@ -1,0 +1,116 @@
+<div id="wrapper">
+   <div id="operataion">
+  	<h1>Operations</h1>
+
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+
+					                        
+<a id="couponsFooter" href="/manage/coupons">Coupons</a>
+
+<a href="<?php  echo BASE_URL; ?>appointments/recentappointments">Reports</a> 
+     
+					     </div>   
+  
+<div id ="contentarea"> 
+
+<h1>Services Offered</h1>
+
+<a id="serviceslogin" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'add-services')); ?>" style="text-decoration:none; color:black"><button>Add Services</button></a>
+
+  	<div class="titlestrip">
+		<div class="servicestitles">Services</div>
+		<div class="servicestitles">Services Time</div>
+		<div class="clear"></div>
+	</div>
+<div class="innercontent">
+<ul>
+	<li id="listservices">
+	
+	<?php foreach($this->Services as $services): ?>
+	<div class="serviceoffer"> <a href="<?php  echo $this->baseUrl(); ?>/manage/edit-service/id/<?php  echo $services['serviceID']; ?>"><?php echo $services['serviceName'];?> </a></div>
+	<div class="serviceoffer"> <?php echo $services['duration'];?> </div>
+
+
+<?php endforeach; ?>
+<br />
+
+<div style="float: left; clear: both;">
+<?php  echo $this->paginationControl($this->Services, 'Sliding', 'pagination.phtml'); ?>
+</div>
+
+<div style="clear:both;"></div>
+
+</li>
+</ul>
+</div>
+<br/>
+
+
+
+
+
+<a id="serviceslogin" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'operations')); ?>" style="text-decoration:none; color:white"> Back </a>
+
+</div>
+</div>
+
+
+<!--
+
+
+
+<h1>Services Time Durations</h1>
+
+<a id="serviceslogin" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'add-services')); ?>" style="text-decoration:none; color:white">Add Services</a>
+
+  	<div class="titlestrip">
+		<div class="servicestitles">Services</div>
+		<div class="servicestitles">Services Time</div>
+		<div class="clear"></div>
+	</div>
+<div class="innercontent">
+<ul>
+	<li id="listservices">
+	
+	<?php foreach($this->Services as $services): ?>
+	<div class="serviceoffer"> <?php echo $services['serviceName'];?> </div>
+	<div class="serviceoffer"> <?php echo $services['duration'];?> </div>
+
+
+<?php endforeach; ?>
+
+<br/>
+
+<?php  echo $this->paginationControl($this->Services, 'Sliding', 'pagination.phtml'); ?>
+
+<div style="clear:both;"></div>
+
+</li>
+</ul>
+</div>
+<br/>
+
+<a id="serviceslogin" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'operations')); ?>" style="text-decoration:none; color:white"> Back </a>
+
+-->

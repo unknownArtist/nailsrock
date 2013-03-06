@@ -1,0 +1,273 @@
+<div id="wrapper">
+  
+  <div id="employee">
+  	<h1>Edit Technician</h1>
+
+ <a  href="
+      <?php  echo $this->baseUrl()."/manage/delete-technician/id/".$this->technicianID; ?>">Delete</a>
+
+<form  enctype="application/x-www-form-urlencoded" method="post" 
+
+
+action="<?php  echo $this->baseUrl(); ?>/manage/edit-technician" onsubmit="return true"><dl class="zend_form">
+<?php
+	
+    echo $this->form->technicianID->render();
+?>
+
+<?php
+	echo $this->form->name->render();
+?>
+
+<label style="float: left; clear: both;">Days Avialable</label>
+
+<table id="addtechnitian-table">
+<tr>
+	<td>Sun</td>
+	<td>Mon</td>
+	<td>Tue</td>
+	<td>Wed</td>
+	<td>Thu</td>
+	<td>Fri</td>
+	<td>Sat</td>
+</tr>
+<tr>
+	<td>
+    
+<?php
+	echo $this->form->sunCloseAllDay->render();
+?>
+
+
+    </td>
+    <td>
+       
+<?php
+	echo $this->form->monCloseAllDay->render();
+?>
+
+    </td>
+	<td>
+ 
+<?php
+	echo $this->form->tueCloseAllDay->render();
+?>
+
+</td>
+	<td> 
+
+    
+<?php
+	echo $this->form->wedCloseAllDay->render();
+?>
+
+
+ </td>
+ <td>
+    
+<?php
+	echo $this->form->thusCloseAllDay->render();
+?>
+
+
+</td>
+	<td>
+    
+<?php
+	echo $this->form->friCloseAllDay->render();
+?>
+
+
+    </td>
+	<td>
+    
+    
+<?php
+	echo $this->form->satCloseAllDay->render();
+?>
+
+
+    </td>
+</tr>
+
+
+<tr>
+	<td>
+    <span>Start:</span> <br />
+      
+    
+<?php
+	echo $this->form->sunOpen->render();
+?>
+
+      <span>End:</span> <br />
+    
+<?php
+	echo $this->form->sunClose->render();
+?>
+
+
+  
+    </td>
+	<td>
+      <span>Start:</span> <br />
+  
+<?php
+	echo $this->form->monOpen->render();
+?>
+
+ 
+      <span>End:</span> <br />
+     
+<?php
+	echo $this->form->monClose->render();
+?>
+
+    </td>
+	<td>
+    
+    <span>Start:</span> <br />
+  
+
+  
+<?php
+	echo $this->form->tueOpen->render();
+?>
+
+    
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->tueClose->render();
+?>
+
+    </td>
+	<td>
+     
+
+<span>Start:</span> <br />
+ 
+  
+<?php
+	echo $this->form->wedOpen->render();
+?>
+
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->wedClose->render();
+?>
+
+    </td>
+	<td>
+
+
+
+
+
+  <span>Start:</span> <br />
+  
+  
+  
+<?php
+	echo $this->form->thusOpen->render();
+?>
+
+
+      <span>End:</span> <br />
+ 
+    
+<?php
+	echo $this->form->thusClose->render();
+?>
+
+
+
+
+    </td>
+	<td>
+      <span>Start:</span> <br />
+  
+  
+  
+<?php
+	echo $this->form->friOpen->render();
+?>
+
+ <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->friClose->render();
+?>
+
+     
+    </td>
+    
+	<td>
+      <span>Start:</span> <br />
+ 
+  
+<?php
+	echo $this->form->satOpen->render();
+?>
+
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->satClose->render();
+?>
+
+ 
+    </td>
+</tr>
+</table>
+<br />
+<dt></dt>
+<dd>
+
+<br />
+<label style="float: left; clear: both;">Services Offered</label> <br />
+<div style="float: ; clear: both;"></div>
+
+<ul style="list-style-type: none;">
+
+
+<?php foreach($this->Services as $t): ?>
+<li>  
+<input type="checkbox" name="service[]" value="<?php echo $t['serviceID'];?>"
+
+<?php
+	if ($t['checked']) { echo 'checked="1"';}
+?>
+ /> 
+
+
+
+<?php echo $t['serviceName']." : ".$t['duration']." Minutes"; ?>  </li>
+
+
+
+<?php  endforeach; ?>
+
+</ul>
+
+</dd>
+
+<dt id="AddTechnician-label">&nbsp;</dt><dd id="AddTechnician-element">
+<input name="AddTechnician" id="AddTechnician" value="Save Technician" type="submit"/></dd>
+
+
+</dl>
+
+</form>
+
+
+					     </div>
+				
+
+  </div>
+

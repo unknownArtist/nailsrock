@@ -1,0 +1,613 @@
+
+<div id="wrapper" >
+
+
+<style type="text/css">
+<!--
+	#wrapper {
+    margin: auto;
+    min-width: 1000px;
+    padding-bottom: 200px;
+  
+    text-align: center;
+}
+
+#technitian_div {
+    border: none;
+    margin: auto;
+    text-align: center;
+}
+
+-->
+
+</style>
+<input type="hidden" name="ajax_on" value="" id="ajax_on" class="" />
+
+
+<input type="hidden" name="appointment_editing_on" value="" id="appointment_editing_on" class="" />
+
+
+
+
+<div id ="appointments" >
+ <form onsubmit="return false;" method="post" 
+     action="<?php  echo $this->baseUrl(); ?>/appointments/makeappointment" id="appointment-form" >
+     
+<div id="floatMenu">
+<table>
+        <tr>
+        <td colspan="2">
+<input type="submit" value="Book Appointment" id="submit" />
+<br />
+         </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div style="height: 21px; width: 20px; border: 1px #837066 solid;" class="available">
+                </div>
+            </td>
+            <td class="content">
+                = Available
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px; border: 1px #837066 solid;" class="booked">
+                </div>
+            </td>
+            <td class="content">
+                = Booked
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px;  border: 1px #837066 solid;" class="no_service">
+                </div>
+            </td>
+            <td class="content">
+                = No Service
+            </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+        <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
+        </td>
+        </tr>
+    </table>
+    <!--<div style="margin-left:50px;">
+    <input type="submit" value="Book Appointment" id="submit" />
+    </div>
+    
+<div>
+    <div style="height: 21px; width: 20px; border: 1px #837066 solid;" class="available">
+                </div>
+                = Available
+    <div style="height: 21px; width: 20px; border: 1px #837066 solid;" class="available">
+                </div>
+                = Booked
+    <div style="height: 21px; width: 20px; border: 1px #837066 solid;" class="available">
+                </div>
+                = No Service
+    </div>
+    <div style="margin-left:20px;">
+     <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
+    </div>-->
+    
+</div>
+
+<br />
+<h1>Appointments Page </h1>
+    
+    
+    <table id="appointment-table">
+   <tr>
+   
+   <td colspan="3" style="border-bottom: 1px solid black;">
+   
+    <?php echo $this->form->date->render(); ?>
+   
+
+   <div id="current_time" style="padding-left: 10px; margin-left: 30px; font-weight: bold; "> <?php  echo date('H:m:s a'); ?>      </div>
+   </td>
+   </tr>
+    
+<tr>
+	<td><?php echo $this->form->firstName->render(); ?></td>
+	<td>
+ 
+    <?php echo $this->form->memberID->render(); ?>
+	
+</td>
+	<td><input type="button" value="Reset for New Customer" id="reset" /></td>
+</tr>
+<tr>
+
+<style type="text/css">
+<!--
+	.lastname-row dt,.lastname-row  dd,.lastname-row   span  {
+	   float: left;
+       
+       
+ 
+	}
+-->
+</style>
+
+	<td class="lastname-row" colspan="2"> <span>Last Name</span>  <?php echo  $this->form->lastName->render(); ?>
+    
+    </td>
+
+	<td></td>
+    	
+</tr>
+<tr>
+	<td colspan="2">
+	<label>Phone Number:</label> 
+	<?php echo $this->form->phCode->render(); ?>
+	
+<?php echo $this->form->phone->render(); ?></td>
+	<td></td>
+	
+</tr>
+
+<tr>
+<td colspan="1" style="border-top: 1px solid black;">
+
+    <?php echo $this->form->serviceID->render(); 
+      $rows=$this->servicesIdsDurations;
+             
+     
+         if (is_array($rows)) {
+            
+	       foreach ($rows as $id=>$value) {
+	 ?>  <input type="hidden" name="" value="<?php  echo $value; ?>" id="<?php  echo $id; ?>" class="" />   <?php
+           }
+         }
+    
+    ?>
+    
+    
+    
+    
+    
+</td>
+<td>  <input type="Radio" checked="1"  value="1" id="drag-srop" class="" name="drag-srop" />
+
+ Activate Drag & Drop
+ 
+ <input type="Radio"  value="0" id="drag-srop" class="" name="drag-srop" />
+
+ Quick Delete
+ 
+ 
+</td>
+
+
+
+<td>
+<!--
+<input type="checkbox" checked="1" value="1" id="appointment-slider" class="" name="" />
+
+ Autoscroll
+-->
+</td>
+</tr>
+</table>
+ 
+    
+<input type="hidden" name="current_appointment_id" value="" id="current_appointment_id" class="" />
+<input type="hidden" name="new_time_id" value="" id="new_time_id" class="" />
+<input type="hidden" name="new_technicianID" value="" id="new_technicianID" class="" />
+<input type="hidden" name="" value="" id="new_tech_time_id" class="" />
+
+
+
+	<div style=" clear:both;"></div>
+
+<div id="technitian_div" >
+
+</div>
+
+<br />
+<br />
+<br />
+
+<br />
+</form>
+
+</div>
+</div>
+  
+<script type="text/javascript">
+
+
+
+    	jQuery( '#reset' ).click(function (){
+                
+                jQuery('#appointment-form .reset').val('');
+                
+        });
+
+   jQuery( '#floatMenu' ).addClass('floatMenu');
+	jQuery( ".date" ).datepicker({ dateFormat: 'm-d-y' });
+ 
+	$(function() {
+
+		$( "#memberID" ).autocomplete({
+			source: '/appointments/autocompletecustomer',
+            minLength: 1,
+			close: function( event, ui ) {
+			 
+   
+		        var id=jQuery(this).val();
+                
+              //  alert(id)
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadcustomer/format/json/id/'+id,
+  success: function(data) {
+    jQuery('.result').html(data);
+    
+  // alert(""+data.memberID);
+  
+    jQuery('#firstName').val(data.firstName );
+      jQuery('#lastName').val(data.lastName );
+        jQuery('#email').val(data.email );
+          jQuery('#phone').val(data.phone );
+    
+  }
+});
+
+        
+			}
+		});
+	});
+
+    
+
+   function loadAppointments(){
+    
+    var ajax_on= jQuery('#ajax_on').val();
+    
+     var current_appointment= jQuery( '#appointment_editing_on' ).val(); 
+    
+  //alert(  ajax_on+" ok "+current_appointment    );
+    if ( ajax_on|| current_appointment ) {
+      //  alert("ok");
+        return;
+    }
+    
+  //   alert("o");
+         var currentId= jQuery('#current_appointment_id').val();
+   
+    
+    if (currentId ){
+       
+        var current_appoint_id= jQuery('#'+currentId+" .appointment_bt" ).val();
+        
+       //  alert( current_appoint_id );
+        
+    }
+   
+        
+    
+    
+       var serviceID= jQuery( '#serviceID' ).val();
+       var date=jQuery( '#date' ).val();
+    
+       if (  !date ){
+        return;
+       }
+    	// alert("ok");
+         
+         
+         
+       var token=Math.random();
+   
+        var date=jQuery('#date').val();
+        var serviceID=jQuery('#serviceID').val();
+        var url_add=null;
+        if (serviceID){
+             url_add= "/serviceID/"+serviceID;
+             
+             if ( current_appoint_id ){
+                url_add+="/appoint_id_edit/"+current_appoint_id;
+             }
+    
+        }
+        
+        
+        if ( url_add  ){
+             var url="<?php echo BASE_URL.'appointments/loadtechnitiantable/date/' ?>"+date+url_add+"/token/"+token;
+        } else {
+             var url= "<?php echo BASE_URL.'appointments/loadtechnitiantable/date/' ?>"+date+"/token/"+token;
+        }
+        
+        
+  //  alert(url);
+          jQuery.ajax({
+  url: url,
+  success: function(data) {
+    
+      jQuery ('#ajax_on').val('');
+          
+        jQuery ('#ajax-bar').hide();
+    
+    jQuery('#technitian_div').html(data);
+    
+    
+ var currentId= jQuery('#current_appointment_id').val();
+ 
+   var new_tech_time_id= jQuery('#new_tech_time_id').val();
+    if ( new_tech_time_id ) {
+        
+        
+        jQuery( '#'+new_tech_time_id ).css('opacity','.30');
+        
+        
+               $('#'+new_tech_time_id ).
+    draggable( {
+      containment: '#content',
+      stack: '#cardPile div',
+      cursor: 'move',
+      revert: true
+    } );
+   
+    } else {
+          
+   jQuery( '#'+currentId ).css('opacity','.30'); 
+  
+               $('#'+currentId+',.appointment_bt,' ).
+    draggable( {
+      containment: '#content',
+      stack: '#cardPile div',
+      cursor: 'move',
+      revert: true
+    } );
+    
+    
+    }
+ 
+  
+  },
+    beforeSend: function(data) {
+
+       jQuery ('#ajax-bar').show();
+        jQuery ('#ajax_on').val('1');
+  }
+});
+}    
+
+
+/******     This function will load appointment table for dragdrop ******/
+
+   function loadAppointmentsForDate( ){
+    
+        var serviceID= jQuery( '#serviceID' ).val();
+        var date=jQuery( '#date' ).val();
+        var url="<?php echo BASE_URL.'appointments/loadtechnitiantable/date/' ?>"+date;
+        
+        
+         var currentId= jQuery('#current_appointment_id').val();
+   
+   if (!currentId){
+    
+    loadAppointments();
+    return;
+   }
+        
+       if (  !date){
+        return;
+       }
+    	// alert("ok");
+         
+        var date=jQuery('#date').val();
+        var serviceID=jQuery('#serviceID').val();
+        
+      
+       var token=Math.random();
+
+   
+        var current_appoint_id= jQuery('#'+currentId+" .appointment_bt" ).val();
+        
+        if (serviceID){
+             var url=url +"/serviceID/"+serviceID+"/current_appointment_id/"+current_appoint_id+"/token/"+token;
+    
+        }else {
+             var url= url+"/token/"+token;
+    
+        }
+
+          jQuery.ajax({
+  url: url,
+  success: function(data) {
+    
+          
+        jQuery ('#ajax-bar').hide();
+    
+    jQuery('#technitian_div').html(data);
+    
+ var currentId= jQuery('#current_appointment_id').val();
+ 
+ var dragid='#current_'+currentId;
+ 
+   jQuery( '#current_'+currentId ).css('opacity','.30'); 
+   
+       $(".current_drag" ).
+    draggable( {
+      containment: '#content',
+      stack: '#cardPile div',
+      cursor: 'move',
+      revert: true
+    } );
+    
+
+ 
+  },
+    beforeSend: function(data) {
+
+       jQuery ('#ajax-bar').show();
+  }
+});
+}     
+
+    	jQuery( '#serviceID' ).change(function (){
+    	   
+          //  var currentId= jQuery('#current_appointment_id').val();
+          
+          loadAppointmentsForDate( );
+          
+    if (false) {
+        var tech_timeid=jQuery('#current_appointment_id').val();
+ var technicain_timidarr= tech_timeid.split('_');
+ 
+ var technician=technicain_timidarr[0];
+ 
+
+ var time_id=parseInt(technicain_timidarr[1]);
+
+
+     jQuery( '#new_time_id' ).val(time_id);
+    
+    
+    jQuery( '#new_technicianID' ).val(technician);
+        
+      var appointId=  jQuery('#'+tech_timeid).find('.appointment_bt').val();
+    
+       jQuery( '#current_appointment_id' ).val(appointId);
+        
+        
+    //date=2012-10-15&firstName=Pascal&memberID=Pascal+Ledesma&lastName=Ledesma&phCode=(954)&phone=5566&serviceID=2&current_appointment_id=8&new_time_id=46&new_technicianID=4    
+    
+    
+
+    var data=  jQuery('form').eq(0).serialize();
+    
+
+      //  alert(data );
+    
+            jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/save-appointment',
+  data:data, 
+    type: "POST",
+  success: function(data) {
+    //jQuery('.result').html(data);
+ //  alert(data);
+ 
+
+     //   alert(  new_tech_timeid);
+ loadAppointments();
+    
+  }
+
+
+});
+  
+     
+} else {
+    //	 loadAppointments();
+}
+         
+   
+        });
+        
+        
+    	jQuery( '#date' ).change(function (){
+      //  if (!jQuery('#current_appointment_id').val()) {
+                loadAppointmentsForDate( );
+//}
+          
+   
+        });
+        
+        
+       	jQuery( '#submit' ).click(function (){
+    	   
+           if(!jQuery('#firstName').val()) {
+            alert("Select or Enter Member details");
+            
+            return;
+           }
+           
+
+                      if(jQuery('#serviceID').val()==0) {
+            alert("Select A Service to make appointment");
+            
+            return;
+           }
+             if(jQuery('input:checkbox:checked').length==0) {
+            alert("Select A Time Slot to make appointment");
+            
+            return;
+           }
+           
+
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/makeappointment',
+  data:jQuery('#appointment-form').serialize(), 
+    type: "POST",
+  success: function(data) {
+    //jQuery('.result').html(data);
+ //  alert(data);
+ loadAppointments();
+
+    
+  }
+
+
+});
+
+
+
+        });     
+        
+ loadAppointments();
+ 
+
+
+
+
+function reloadAppointment(){
+    
+       var ajax_on= jQuery('#ajax_on').val();
+    
+     var current_appointment= jQuery( '#appointment_editing_on' ).val(); 
+    
+  //alert(  ajax_on+" ok "+current_appointment    );
+    if ( ajax_on|| current_appointment ) {
+      //  alert("ok");
+        return;
+    }
+    
+  //   alert("o");
+         var currentId= jQuery('#current_appointment_id').val();
+   
+    
+    if (currentId ){
+       
+        var current_appoint_id= jQuery('#'+currentId+" .appointment_bt" ).val();
+        
+       //  alert( current_appoint_id );
+        
+    }
+   
+        
+    
+    
+       var serviceID= jQuery( '#serviceID' ).val();
+       var date=jQuery( '#date' ).val();
+    
+       if (  !date ){
+        return;
+       }
+    	// alert("ok");
+        
+        
+    self.location="<?php  echo BASE_URL; ?>";
+          
+
+}
+     // setInterval(  'loadAppointments()',50000);
+      
+</script>
+

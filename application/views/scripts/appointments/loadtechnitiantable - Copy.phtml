@@ -1,0 +1,475 @@
+<style type="text/css">
+
+	.apointment_bt {
+	   margin-top: 0%;
+	}
+
+</style>
+
+
+<span id="times">
+
+<ul>
+
+  <?php  
+         
+  
+           $rows=  $AllTechnicalHoursfordate;
+           
+           
+//       
+//	    echo '<pre>';
+//        print_r(  $rows   );
+//        echo '</pre>';
+//        
+//        die('DEBUG');
+         if (is_array($rows)) {
+            
+            $j=0;
+	       foreach ($rows as $row) {
+	           
+
+                               if ( $j%12==0  ){
+                                
+                                
+
+                     ?>  
+                     
+                     <li style="technician-name-li" >
+                     
+                     <span> 
+                     
+                     <?php  echo $technicianArr[$technicinaID]; ?> </span>
+                      </li>
+    
+                    
+                      <?php
+                    
+                  
+                } 
+                $j++;
+                
+                
+                     if ( $this->current_time_id > $row->id  ){
+            
+            $remove="remove";
+           // echo $remove;
+        }       
+           
+               
+	            ?>  <li  class="<?php  echo $remove; unset($remove) ?>">   <?php  echo $row->interval_time; ?></li>  <?php
+           }
+         }
+    ?>
+
+</ul>
+
+
+</span>
+
+
+
+
+
+
+
+
+
+
+
+<table id="load-appointment-table">
+
+<thead>
+<th> </th>
+			<?php foreach($this->Technician as $data):?>
+                
+					<th >
+						<?php echo $data["Name"]; ?>
+					</th>		
+					<?php
+                    
+                    
+                       endforeach;
+				?>
+</thead>
+
+
+<?php
+$j=0;
+$k=0;
+	foreach ( $this->TechniciansAvailable as $interval=> $tech_members ) {
+	   
+       if ($j%8==0&&$k):
+       ?>  <thead>
+<th> </th>
+			<?php foreach($this->Technician as $data):?>
+                
+					<th style="border-bottom: 1px black solid; border-top: 1px solid black;">
+						<?php echo $data["Name"]; ?>
+					</th>		
+					<?php endforeach;
+				?>
+</thead>
+
+<tbody>
+
+    <tr>  
+    <td style="width: 100px; font: 1em; text-align: left; border: none; font-weight: bold;" > <label><?php echo $interval; ?></label> </td>
+    
+    	<?php foreach($this->Technician as $data):
+ 	   
+	  
+            $technicianID=$data['technicianID'];    
+            $id=$tech_members[$technicianID]['time_id'];
+       
+            $status=$tech_members[$technicianID]['status'];
+            
+        
+               switch ($status){ 
+	case 'available':
+    unset( $_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID']);
+    
+     ?>  <td class="available available_td" style="border-bottom: none ;"> 
+     
+                 
+ 	 <input type="checkbox" 
+      name="technitian_<?php echo $id."_".$data['technicianID']; ?>" value="<?php echo $data['technicianID']; ?>" />
+      
+
+      </td>   <?php
+	break;
+
+	case 'booked':
+    
+     $tech_member=(array) $tech_members[$technicianID]['data'];
+     
+ $same_member=false;
+ $new_memberID= $tech_member[$data['technicianID']]['member']['memberID'];
+
+if( isset($_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID']) ){
+    
+    $prev_memberID=$_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID'];
+    
+    if ( $new_memberID==$prev_memberID ){
+        
+        $same_member=true;
+        
+    }
+    
+}else {
+    $_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID']=$new_memberID;
+}
+
+if ( !$same_member ):
+
+$tech_requested=$tech_member[$data['technicianID']]['tech_requested'];
+
+if ($tech_requested){
+    $tech_requested_class="blue";
+}else {
+    $tech_requested_class="gray";
+}
+
+?>
+   <td class="booked booked_td" style="border-bottom: none; ">  
+   
+
+   <?php
+	
+     $appointment=(array) $tech_members[$technicianID]['appointment'];
+
+       
+
+    $firstName=$tech_member[$data['technicianID']]['member']['firstName'];
+    
+    $serviceName=$appointment['serviceName'];
+    
+    $from=$appointment['interval_time'];
+   
+       
+    
+    
+    $technicianName=$data['Name']; 
+     $time=strtotime($from);
+    $minutes=$appointment['duration'];
+    
+    $to=  date("h:i A", strtotime("+$minutes minutes", $time));;
+        
+         
+      
+    
+     
+     $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
+     
+
+    
+?>
+           
+   
+   
+              
+  <button title="<?php  echo $title; ?>" class="apointment_bt <?php  echo $tech_requested_class; ?> " value="<?php  echo $tech_member[$technicianID]['appointment_id'] ; ?>"> 
+  
+  <?php     echo $tech_member[$data['technicianID']]['member']['firstName'];  ?></button>   
+      
+     
+     <?php
+     
+     else: 
+     
+      ?>   <td style="border-top: none ; border-bottom: none;">  <?php
+     
+       endif;  ?> 
+     
+      </td> 
+      <?php
+    
+	break;
+
+	case 'no_service':
+    
+     ?>   <td class="no_service no_service_td"> </td> <?php
+	break;	
+} 
+            endforeach; 
+                   
+				?>
+	
+     </tr>
+     </tbody> 
+  <?php
+      else:
+         $k=1;
+	?>
+    
+<tbody>
+
+    <tr>  
+    <td style="width: 100px; font: 1em; text-align: left; border: none; font-weight: bold;"> <label><?php echo $interval; ?></label> </td>
+    
+    	<?php foreach($this->Technician as $data):
+ 	   
+	  
+            $technicianID=$data['technicianID'];    
+            $id=$tech_members[$technicianID]['time_id'];
+       
+            $status=$tech_members[$technicianID]['status'];
+            
+
+        
+               switch ($status){ 
+	case 'available':
+    unset( $_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID']);
+    
+     ?>  <td class="available available_td" style="">       
+ 	 <input type="checkbox" name="technitian_<?php echo $id."_".$data['technicianID']; ?>" value="<?php echo $data['technicianID']; ?>" />
+      </td>   <?php
+	break;
+
+	case 'booked':
+    
+     $tech_member=(array) $tech_members[$technicianID]['data'];
+     
+     $appointment=(array) $tech_members[$technicianID]['appointment'];
+
+
+ $same_member=false;
+ $new_memberID= $tech_member[$data['technicianID']]['member']['memberID'];
+
+if( isset($_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID']) ){
+    
+    $prev_memberID=$_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID'];
+    
+    if ( $new_memberID==$prev_memberID ){
+        $same_member=true;
+    }
+    
+}else {
+    $_SESSION[$technicianID][ $tech_member[$technicianID]['appointment_id']]['prev_memberID']=$new_memberID;
+}
+
+if ( !$same_member ):
+$tech_requested=$tech_member[$data['technicianID']]['tech_requested'];
+
+if ($tech_requested){
+    $tech_requested_class="blue";
+}else {
+    $tech_requested_class="gray";
+}
+?>
+   <td class="booked booked_td" style="border-bottom: none; ">  
+   
+   
+   <?php
+	
+
+    $firstName=$tech_member[$data['technicianID']]['member']['firstName'];
+    
+    $serviceName=$appointment['serviceName'];
+    
+    $from=$appointment['interval_time'];
+    $time=strtotime($from);
+       
+    $minutes=$appointment['duration'];
+    
+    $technicianName=$data['Name']; 
+    
+    $to=  date("h:i A", strtotime("+$minutes minutes", $time));;
+        
+         
+      
+    
+     
+     $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
+     
+  // echo $title;
+      //   
+//	    echo '<pre>';
+//        print_r(  $appointment );
+//        echo '</pre>';
+//        
+//        die('DEBUG');
+    
+?>
+              
+  <button title="<?php  echo $title; ?>" class="apointment_bt <?php  echo $tech_requested_class; ?>" value="<?php  echo $tech_member[$technicianID]['appointment_id'] ; ?>"> 
+  
+  <?php 
+  
+      echo $tech_member[$data['technicianID']]['member']['firstName'];  ?></button>   
+      
+     
+     <?php
+     
+     else: 
+   
+     
+      ?>  
+      
+       <td style="border-top: none ; border-bottom: none;">  <?php
+     
+       endif;  ?> 
+     
+      </td> <?php
+    
+	break;
+
+	case 'no_service':
+    
+     ?>   <td class="no_service no_service_td"> </td> <?php
+	break;
+
+	
+} 
+            endforeach; 
+                   
+				?>
+	
+     </tr>
+     </tbody> 
+    <?php
+    
+    endif;
+    ?>    <?php
+    
+    $j++;
+     
+}
+?>
+
+</table>
+
+<!-- for dialog -->
+
+<div id="appointment-details" style="display: none;">
+
+<form action="#" onsubmit="return false" method="post" enctype="application/x-www-form-urlencoded">
+
+<h1>Appointment Details</h1>
+
+
+<div id="appointment-details-div">
+
+</div>
+
+
+</form>
+
+</div>
+
+
+<script type="text/javascript">
+<!--
+		jQuery( '.apointment_bt' ).click(function (){
+		  
+          
+          var id=jQuery(this).val();
+          	   
+
+//  alert(id);
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadappointment/id/'+id,
+  success: function(data) {
+  
+   
+   
+   jQuery('#appointment-details-div').html(data);
+   
+   jQuery( '#appointment-details' ).dialog({title:'Nailsrock',width:400,height:250});
+   
+   
+   
+   
+        //    delete appointment
+        
+		jQuery( '.delete-appointment' ).click(function (){
+		  
+          
+          var id=jQuery(this).val();
+          	   
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/deleteappointment/id/'+id,
+  success: function(data) {
+  
+     
+   
+   jQuery( '#appointment-details' ).dialog('close');
+   
+   jQuery( '#appointment-details' ).dialog('destroy');
+ 
+   
+ 
+        
+         	$('.datepicker').datepicker({dateFormat:"yy-mm-dd"});
+            
+            
+       
+   loadAppointments();
+
+  }
+});
+      
+     
+
+});
+
+   
+    
+  }
+});
+          
+          
+               
+        }); 
+        
+    
+       
+    //    http://appsystem/appointments/deleteappointment/id/8
+        
+        
+        
+        
+-->
+</script>
+
+

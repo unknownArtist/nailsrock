@@ -1,0 +1,68 @@
+<div id="wrapper">
+
+ <div id="operataion">
+  	<h1>Operations</h1>
+
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+					   
+					   
+					   
+					     </div>
+  </div>
+  
+  <div id="contentarea">
+  	<h1>Accounts</h1>
+      <button id="addaccount">Add Technician</button>
+  	<div class="titlestrip">
+
+		<div class="titles">Name</div>
+		<div class="titles">Status</div>
+		
+
+
+		<div class="clear"></div>
+	</div>
+	
+	<div id="editprofile">
+	<div class="accountbg"> 
+
+
+    <?php foreach($this->Technicians as $t): echo "<br />"; ?>
+
+
+    <a href="<?php echo $this->Url(
+                            array(
+                            'controller' 		=>  'manage',
+                            'action'     		=>  'add-technician',
+                            'TechnicianID'      =>   $t['technicianID'],
+                            )); ?>"><?php echo $t['Name']." " ?></a>
+
+<div class="innertext"> 
+  
+  </div>
+  <?php
+ 
+  
+  echo "<span id='phonenumber'>".$t['status']."</span>";
+
+  endforeach; ?>
+
+  </div>
+ 
+  </div>
+  <?php // echo $this->paginationControl($this->Members, 'Sliding', 'pagination.phtml'); ?>
+  </div>
+  </div>

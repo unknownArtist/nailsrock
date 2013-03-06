@@ -1,0 +1,74 @@
+  <script type="text/javascript">
+  $(function(){
+
+    $("button, input[type='button']").click(function(){
+
+     // alert("hello clicked");
+      return false;
+      
+    });
+  });
+</script>
+<style type="text/css">
+.dijitReset  {
+
+   padding: 2px;
+}
+.odd {
+   background: #ccc;
+}
+
+</style>
+ <table class="sortable">
+     <thead class="titlestrip">
+        <th> <div class="titles">Name</div> </th>
+        <th> <div class="titles">Phone</div>   </th>
+      
+        <th> <div class="titles">Email</div> </th>
+          <th>  <div class="titles">VIP Member</div> </th>
+     </thead>
+     
+<tbody>
+
+    <?php foreach($this->Members as $t): ?>
+    
+<tr>
+	<td> <a href="<?php echo $this->Url(
+                            array(
+                            'controller' =>  'member',
+                            'action'     =>  'view-account',
+                            'memberID'         =>   $t['memberID'],
+                            )); ?>">
+                            
+                            
+                            
+                            <?php echo $t['firstName']." " ?></a></td>
+	<td> <?php    echo "<span id='phonenumber'>".$t['phone']."</span>"; ?></td>
+	<td><?php    echo "<span id='accountemail'>".$t['email']."</span> "; ?></td>
+
+	<td style="text-align: center;">
+    <?php
+	
+    if ($t['vipMember']==1) { echo 'YES';}  else {
+        echo 'NO';
+    }
+?>
+    
+    </td>
+
+   
+  <?php
+ 
+
+ 
+ ?>   </tr>  <?php
+  endforeach; ?>
+
+
+
+</tbody>
+     
+     
+     </table>
+     
+  

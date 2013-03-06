@@ -1,0 +1,340 @@
+<div id="wrapper">
+   <div id="operataion">
+  	<h1>Operations</h1>
+
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+
+					                        
+<a id="couponsFooter" href="/manage/coupons">Coupons</a>
+
+<a href="<?php  echo BASE_URL; ?>appointments/recentappointments">Reports</a> 
+     
+					     </div>
+
+  <div id="contentarea" style="min-height: 800px;">
+
+<h1>Shop Hours</h1>
+<h3>Normal Day-TO-Day Hours</h3>
+
+
+
+<form  enctype="application/x-www-form-urlencoded" method="post" 
+
+
+action="<?php  echo $this->baseUrl(); ?>/manage/shop-hours" onsubmit="return true" id="addShophours"  ><dl class="zend_form">
+
+<table id="addtechnitian-table">
+<tr>
+	<td>Sun</td>
+	<td>Mon</td>
+	<td>Tue</td>
+	<td>Wed</td>
+	<td>Thu</td>
+	<td>Fri</td>
+	<td>Sat</td>
+</tr>
+<tr>
+	<td>
+    
+<?php
+	echo $this->form->sunCloseAllDay->render();
+?>
+
+
+    </td>
+    <td>
+       
+<?php
+	echo $this->form->monCloseAllDay->render();
+?>
+    </td>
+	<td>
+<?php
+	echo $this->form->tueCloseAllDay->render();
+?>
+
+</td>
+	<td> 
+
+    
+<?php
+	echo $this->form->wedCloseAllDay->render();
+?>
+
+ </td>
+ <td>
+    
+<?php
+	echo $this->form->thusCloseAllDay->render();
+?>
+
+
+</td>
+	<td>
+    
+<?php
+	echo $this->form->friCloseAllDay->render();
+?>
+
+
+    </td>
+	<td>
+      
+<?php
+
+	echo $this->form->satCloseAllDay->render();
+    
+?>
+    </td>
+</tr>
+
+
+<tr>
+	<td>
+    <span>Start:</span> <br />
+      
+   
+  
+   <?php
+	echo $this->form->sunOpen->render();
+?>
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+  
+      <span>End:</span> <br />
+    
+<?php
+	echo $this->form->sunClose->render();
+?>
+<br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+  
+    </td>
+	<td>
+      <span>Start:</span> <br />
+  
+<?php
+	echo $this->form->monOpen->render();
+?>
+
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+ 
+      <span>End:</span> <br />
+     
+<?php
+	echo $this->form->monClose->render();
+?>
+<br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+    </td>
+	<td>
+    
+    <span>Start:</span> <br />
+  
+
+  
+<?php
+	echo $this->form->tueOpen->render();
+?>
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+    
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->tueClose->render();
+?>
+<br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+    </td>
+	<td>
+     
+
+<span>Start:</span> <br />
+ 
+  
+<?php
+	echo $this->form->wedOpen->render();
+?>
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->wedClose->render();
+?>
+<br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+    </td>
+	<td>
+
+
+
+
+
+  <span>Start:</span> <br />
+  
+  
+  
+<?php
+	echo $this->form->thusOpen->render();
+?>
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+      <span>End:</span> <br />
+ 
+    
+<?php
+	echo $this->form->thusClose->render();
+?>
+
+<br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+
+
+    </td>
+	<td>
+      <span>Start:</span> <br />
+  
+  
+  
+<?php
+	echo $this->form->friOpen->render();
+?>
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+ <span>End:</span> <br />
+  
+<?php
+	echo $this->form->friClose->render();
+?>
+
+   <br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+  
+    </td>
+    
+	<td>
+      <span>Start:</span> <br />
+ 
+  
+<?php
+	echo $this->form->satOpen->render();
+?>
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->satClose->render();
+?>
+
+
+ <br />
+<img src="<?php  echo $this->baseUrl(); ?>/images/watch.jpg" />
+
+    </td>
+</tr>
+</table>
+
+
+
+
+<br />
+
+<div style="float: left; clear: both;">
+
+<dd id="AddTechnician-element">
+<input name="AddTechnician" id="AddTechnician" value="Save Hours" type="submit"></dd>
+</div>
+
+</dl>
+
+</form>
+
+<div style="float: left; clear: both;"></div>
+
+<br />
+<br />
+
+
+<br />
+<br />
+
+
+
+<div >
+
+<hr style="width: 100%; float: left; clear: both;" />
+<form action="<?php  echo $this->baseUrl(); ?>/manage/shop-custom-hours" method="POST">
+
+<div style="float: left; clear: both; margin-top: 20px;">
+
+
+<h3>Custom shop Hours</h3>
+
+<?php  echo $this->formCustomHours; ?>
+
+</div>
+</form>
+
+<div style="float: left; clear: both; margin-bottom: 150px; margin-top: 10px;">
+
+<table>
+<tr class="titlestrip">
+<td>  </td>
+<td> <div class="titles" style="width: 80px;">Date </div>     </td>
+<td> <div class="titles">  Open&nbsp;Time</div>            </td>
+<td>  <div class="titles"> Close&nbsp;Time</div>        </td>
+<td>  <div class="titles"> Comments</div>         </td>
+</tr>
+
+  
+<?php foreach($this->data as $shop): ?>
+ <tr>     
+<td><a  href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'delete-custom-shop-hours',
+                       'ID' => $shop['ID'] 
+                       ));?>" 
+style="text-decoration:none; color:red; text-decoration: underline; margin: 0 5px;"> Delete </a></td>
+<td style="text-align: center;"><?php echo $shop['date']?>&nbsp;</td>
+<td style="text-align: center;"><?php echo $shop['start']?>&nbsp;</td>
+<td style="text-align: center;"><?php echo $shop['end']?>&nbsp;</td>
+<td style="text-align: center;"><?php echo $shop['comments']?>&nbsp;</td>
+</tr>
+<?php endforeach; ?>
+
+</table>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+					   
+ </div>
+ 
+  </div>

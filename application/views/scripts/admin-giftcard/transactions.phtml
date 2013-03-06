@@ -1,0 +1,114 @@
+<div id="wrapper">
+<div id ="contentarea" style="min-height:300px;">
+<h1> Gift Cards Manager </<?php
+	$giftcard=$this->giftcard;
+?>h1>
+
+<h3>Transactions for GIft Card No. <?php  echo $giftcard->card_no; ?></h3>
+
+<style type="text/css">
+<!--
+	#gift-card-table td{
+	   
+       text-align: center;
+	}
+-->
+</style>
+<div>
+
+
+</div>
+<?php
+	$paginator=$this->paginator;
+
+if ( count($paginator) ) {
+?>
+<table class="sortable" id="gift-card-table">
+     <thead class="titlestrip">
+        <th style="width: 20px;" > <div class="titles" style="width: 20px;">ID</div> </th>
+        <th> <div class="titles">Date  </div>   </th>
+       
+        <th style="width: 100px;"> <div class="titles"  style="width: 100px;">Balance Used($)</div> </th>
+       <!--
+ <th style="width: 100px;">  <div class="titles" style="text-align: center; width: 100px;" ">Created By</div> </th>
+        
+-->
+         <th> <div class="titles">Note</div> </th>
+          <th>  <div class="titles">Operation</div> </th>
+     </thead>
+     
+<tbody>
+
+<?php
+
+    
+    function USAToMySQLDate($usa_date)
+    {
+
+        list($m, $d, $y) = explode('-', $usa_date);
+
+        return $date = "20" . $y . "-" . $m . "-" . $d;
+    }
+    function MySQLToUSADate($mysql_date)
+    {
+
+        list($y, $m, $d, ) = explode('-', $mysql_date);
+
+        return $date = $m . '-' . $d . '-' . substr($y, -2, 2);
+    }
+
+
+foreach ( $paginator as $row     ) {
+	   
+       
+	 ?>   
+  
+     <tr>
+     
+     <td>     <?php  echo $row->id; ?>           </td>
+     
+     <td>      <?php
+     
+     
+      echo date( 'm-d-Y h:m:s a' ,strtotime($row->date));
+       
+       
+       ?>      </td>
+     <td>       <?php  echo $row->amount; ?>    </td>
+     
+ <td>     <?php  echo $row->note; ?>           </td>   
+      
+      <td>   
+      
+      
+ 
+          &nbsp;  <a href="<?php  echo BASE_URL; ?>/admin-giftcard/undotransaction/id/<?php  echo $row->id ; ?>"> Undo  </a>
+      
+         
+          &nbsp;  <a href="<?php  echo BASE_URL; ?>/admin-giftcard/delete-transaction/id/<?php  echo $row->id ; ?>"> Delete  </a>
+      
+      
+      
+      </td>
+  
+     
+     </tr>
+     
+       <?php
+    
+    }
+
+	} else {
+ ?>  <h1>No Gift Card Transactions </h1>   <?php
+}
+
+	
+
+?>
+
+
+
+</div>
+</div>
+
+

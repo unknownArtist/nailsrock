@@ -1,0 +1,109 @@
+<div id="wrapper">
+<div id ="contentarea" style="min-height:300px;">
+<h1> Gift Cards </h1>
+
+
+<div>
+
+
+</div>
+<?php
+
+
+$api_login_id = Zend_Registry::get( 'api_login_id' );
+$transaction_key=Zend_Registry::get( 'transaction_key'  );
+
+$md5_setting =Zend_Registry::get( 'md5_setting' );
+
+$amount = trim($_POST['x_amount']);
+
+$member=(array) My_Auth::getInstance()->getLoggedUser();
+
+extract(  $member );
+
+$desc=trim($_POST['x_description']);
+
+$fp_timestamp = time();
+$fp_sequence = "123" . time(); // Enter an invoice or other unique number.
+$fingerprint = AuthorizeNetSIM_Form::getFingerprint($api_login_id,
+  $transaction_key, $amount, $fp_sequence, $fp_timestamp);
+  
+
+//
+//$amount = "5.99";
+?>
+
+<form method='post' action="https://secure.authorize.net/gateway/transact.dll">
+<input type='hidden' name="x_login" value="<?php echo $api_login_id?>" />
+<input type='hidden' name="x_fp_hash" value="<?php echo $fingerprint?>" />
+
+<input type='hidden' name="x_amount" value="<?php echo $amount?>" />
+
+
+<input type='hidden' name="x_description " value="<?php echo $desc?>" size="30" />
+
+
+<input type='hidden' name="x_fp_timestamp" value="<?php echo $fp_timestamp?>" />
+<input type='hidden' name="x_fp_sequence" value="<?php echo $fp_sequence?>" />
+<input type='hidden' name="x_version" value="3.1">
+<input type='hidden' name="x_show_form" value="payment_form">
+<input type='hidden' name="x_test_request" value="false" />
+<input type='hidden' name="x_method" value="cc">
+
+
+<?php
+	/**
+	    'x_first_name' => '',
+  'x_last_name' => '',
+  'x_company' => '',
+  'x_address' => '',
+  'x_city' => '',
+  'x_state' => '',
+  'x_zip' => '',
+  'x_country' => '',
+  'x_phone' => '',
+  'x_fax' => '',
+  'x_email' => '',
+
+	 */
+              
+
+?>
+
+<input type='hidden' name="x_cust_id" value="<?php  echo $memberID; ?>">
+
+
+<input type='hidden' name="x_first_name" value="<?php  echo $firstName; ?>">
+
+<input type='hidden' name="x_last_name" value="<?php  echo $lastName; ?>">
+
+<input type='hidden' name="x_address" value="<?php  echo $address; ?>">
+
+<input type='hidden' name="x_state" value="<?php  echo $state; ?>">
+
+<input type='hidden' name="x_city" value="<?php  echo $city; ?>">
+
+<input type='hidden' name="x_zip" value="<?php  echo $zip_code; ?>">
+
+<input type='hidden' name="x_phone" value="<?php  echo $phone; ?>">
+
+<input type='hidden' name="x_email" value="<?php  echo $email; ?>">
+
+
+<INPUT TYPE=HIDDEN NAME="x_relay_response" VALUE="TRUE"> 
+<INPUT TYPE=HIDDEN NAME="x_relay_url" VALUE="http://admin.nailsrock.biz/giftcard/confirm-giftcard">
+
+<!--
+<INPUT TYPE=HIDDEN NAME="x_receipt_link_method" VALUE="POST">
+<INPUT TYPE=HIDDEN NAME="x_receipt_link_text" VALUE="Click here to return 
+to Nailsrock home page">
+<INPUT TYPE=HIDDEN NAME="x_receipt_link_URL" VALUE="http://admin.nailsrock.biz/giftcard/confirm-giftcard">
+
+-->
+<input type='submit' value="Click here for the secure payment form">
+</form>
+  
+</div>
+</div>
+
+

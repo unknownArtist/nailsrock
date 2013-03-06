@@ -1,0 +1,649 @@
+
+#header {
+    margin: auto;
+}
+body {
+    background: url("/images/nails-rock-bg.jpg") repeat scroll 0 0 transparent;
+}
+#wrapper {
+    margin: auto;
+    width: 900px;
+}
+h1, h3 {
+    color: red;
+    font-family: arial;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 5px;
+    padding: 0;
+}
+.clear {
+    clear: both;
+}
+
+#menu ul li {
+    display: inline;
+    list-style: none outside none;
+    margin-left: 25px;
+}
+#contentarea {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    padding: 30px;
+}
+.form1 dt {
+    display: block;
+    width: 200px;
+}
+.form1 dd {
+    display: block;
+    width: 300px;
+}
+#operataion {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    padding: 30px 30px 50px;
+}
+#operataion a {
+    color: #BF7161;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+    margin-right: 80px;
+    text-decoration: none;
+}
+#operataion a:hover {
+    color: #4C4C4C;
+    text-decoration: underline;
+}
+#contentarea ul {
+    list-style: none outside none;
+    margin: 25px 0 0;
+    padding: 0;
+}
+#contentarea li {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+#contentarea .titlestrip {
+    background: none repeat scroll 0 0 #B64900;
+    border: 1px solid #8E2900;
+    height: 30px;
+    margin: 15px 0;
+    padding: 5px 10px;
+}
+.titlestrip td {
+    text-align: center;
+}
+#contentarea .titles {
+    color: #FFFFFF;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    width: 200px;
+}
+#contentarea .servicestitles {
+    color: #FFFFFF;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: bold;
+    width: 250px;
+}
+#contentarea .innercontent {
+    border: 1px solid #E1E1E1;
+    padding: 0 15px 15px;
+}
+#employee {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    padding: 30px 30px 50px;
+}
+#coupons {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    min-height: 60px;
+    padding: 30px 30px 50px;
+}
+#createac {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    min-height: 450px;
+    padding: 30px 30px 50px;
+}
+#comments {
+    width: 600px;
+}
+#customhoursform {
+    clear: both;
+    float: left;
+}
+#checkboxes {
+    margin: 240px 0 0;
+    width: 355px;
+}
+#checkboxes input {
+    width: 40px;
+}
+#menu {
+    margin: 20px auto;
+    padding: 1px;
+    text-align: right;
+    width: 700px;
+}
+#menu a {
+    color: #BF7161;
+    font-family: arial;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+#menu a:hover {
+    color: #4C4C4C;
+}
+#userName password {
+    margin-left: 20px;
+}
+#login {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 0 0 90px;
+    padding: 8px 10px;
+    width: 70px;
+}
+#login:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#AddCustomClosedDay {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px 10px;
+    width: 150px !important;
+}
+#AddCustomClosedDay:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#SaveHours {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 20px 0 0;
+    padding: 8px 10px;
+    width: 95px !important;
+}
+#SaveHours:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#file {
+}
+#back {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 150px 0 0;
+    padding: 8px 10px;
+    width: 70px;
+}
+#open {
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+}
+#open input {
+    width: 40px;
+}
+#back:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#formLogin {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: 100px auto auto;
+    min-height: 120px;
+    padding: 30px;
+    width: 400px;
+}
+#addServices {
+    margin: auto auto auto 0;
+    min-height: 110px;
+    width: 560px;
+}
+.serviceslogin {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px;
+    padding: 8px 15px;
+    text-decoration: none;
+    width: 70px;
+}
+.serviceslogin:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#addform {
+    margin: auto;
+    min-height: 430px;
+    width: 375px;
+}
+.serviceoffer {
+    color: #BF7161;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+    width: 300px;
+}
+#editprofile {
+}
+#editprofile a {
+    color: #BF7161;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+    text-decoration: none;
+    width: 212px;
+}
+#editprofile a:hover {
+    color: #4C4C4C;
+    text-decoration: underline;
+}
+#editprofile .innertext {
+    color: #4C4C4C;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+}
+#editprofile pre {
+    background: none repeat scroll 0 0 transparent;
+    color: #4C4C4C;
+    font-family: arial;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+form {
+    margin: 0;
+    padding: 0;
+}
+
+#editAccount {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px 10px;
+    text-decoration: none;
+    width: 150px;
+}
+#editAccount:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#editaccountcontent {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    min-height: 450px;
+    padding: 30px;
+}
+#phonenumber {
+    margin: 0 0 0 90px;
+}
+#accountemail {
+    width: 200px;
+}
+#appointments {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 7px 7px 7px 7px;
+    box-shadow: 0 3px 10px #C1C1C1;
+    margin: auto;
+    padding: 30px;
+}
+#appointments label {
+    color: #4C4C4C;
+    font-family: arial;
+    font-size: 13px;
+    text-align: right;
+    width: 150px;
+}
+#load-appointment-table td {
+    border: 1px solid black;
+}
+#appointment-table td {
+    padding: 5px;
+}
+#appointment-table {
+    width: 800px;
+}
+#appointment-table #memberID {
+    width: 120px;
+}
+#date-label {
+    float: left;
+}
+#date-element {
+    float: left;
+}
+
+
+#serviceID-element {
+    float: left;
+}
+#serviceID-label {
+    float: left;
+}
+#phCode {
+    width: 70px;
+}
+#members {
+    color: #9F9E9E;
+    font-family: arial;
+    font-size: 12px;
+    margin: 20px 10px 20px 0;
+}
+#services {
+    color: #9F9E9E;
+    font-family: arial;
+    font-size: 12px;
+    margin: 20px 0;
+}
+#addtechnitian-table {
+    border: 1px solid black;
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+}
+#addtechnitian-table td {
+    border: 1px solid black;
+    min-height: 25px;
+    text-align: center;
+    width: 110px;
+}
+#addtechnitian-table input {
+    width: 80px;
+}
+#addtechnitian-table span {
+    float: left;
+    font-size: 0.8em;
+}
+#Clear {
+    background: none repeat scroll 0 0 #BF7161;
+    border: medium none;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF !important;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 0 0 110px;
+    padding: 8px 10px;
+    width: 70px;
+}
+#Clear:hover {
+    background: none repeat scroll 0 0 #2F4F4F;
+    border: medium none;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    font-weight: bold;
+}
+#addTechnicians label {
+    color: #4C4C4C;
+    float: left;
+    font-family: arial;
+    font-size: 14px;
+    text-align: right;
+    width: 120px;
+}
+#addTechnicians input {
+    border: 1px solid #E1E1E1;
+    float: left;
+    margin: 0 0 7px 10px;
+    padding: 5px;
+    width: 100px;
+}
+#addTechnicians {
+    margin: auto auto auto 0;
+    min-height: 110px;
+    width: 640px;
+}
+#name {
+    width: 400px;
+}
+
+
+
+
+
+
+
+	.apointment_colors div, .apointment_colors label{
+	   float: left;
+	}
+    
+    .available_td {
+    
+        min-width: 80px;
+        text-align: center;
+    }
+    .booked_td {
+         
+         min-width: 80px;
+        text-align: center;
+    }
+    .no_service_td {
+        min-width: 80px;
+        text-align: center;
+    }
+    
+    #floatMenu  {
+    border: 1px solid black;
+    left: 50%;
+    margin-left: 360px;
+    padding: 10px;
+    
+
+    width: 160px;
+   
+    }
+    .appointment_bt {
+        color: white;
+    }
+    
+ .floatMenu {
+    
+       position: absolute;
+     top: 285px;
+    
+}
+.blue {
+    background-color: #DFACDF;
+    color: #FF0080; 
+    
+}
+  .gray {
+    background-color: gray;
+    
+}  
+
+
+.available {
+    background-color: #BFBF00;
+}
+.booked {
+    background-color: #ECF4ED;
+}
+.no_service {
+    background-color: #C8D7C9;
+}
+h1, h2, h3, h4 {
+    font-family: "Lucida Sans Unicode","Lucida Grande",sans-serif;
+}
+#content {
+    -moz-user-select: none;
+    text-align: center;
+}
+.wideBox {
+    border: 1px solid #333333;
+    clear: both;
+    height: 1100px;
+    padding: 5px;
+    text-align: center;
+    width: 830px;
+}
+.wideBox h1 {
+    color: #666666;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px;
+}
+#cardSlots {
+    margin: 50px auto 0;
+}
+#cardPile {
+    background: none repeat scroll 0 0 #FFFFDD;
+    margin: 0 auto;
+}
+#cardSlots {
+ 
+  
+    height: 1170px;
+    margin-top: 40px;
+    padding: 20px;
+    width: 780px;
+}
+#cardSlots div {
+    height: 20px;
+    text-align: center;
+    width: 100px;
+}
+#cardPile {
+    border: 2px solid #333333;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.8);
+    height: 60px;
+    padding: 10px;
+    width: 780px;
+}
+.technician-names {
+    clear: both;
+    float: left;
+    margin-left: 100px;
+    margin-top: 5px;
+}
+.technician-name {
+    float: left;
+    height: 20px;
+    text-align: center;
+    width: 82px;
+}
+.technician-name-li {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    height: 20px;
+    text-align: center;
+    width: 80px;
+}
+.technician-name-li div {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+#times {
+    float: left;
+    margin-right: 10px;
+}
+#times li {
+    border: 1px solid white;
+    height: 20px;
+}
+#times-slots ul {
+    float: left;
+}
+#times-slots .li-border {
+    border: 1px solid white;
+    text-align: center;
+}
+#cardPile div {
+    background: none repeat scroll 0 0 #666666;
+    color: #FFFFFF;
+    text-shadow: 0 0 3px #000000;
+    width: 58px;
+}
+#cardPile div.ui-draggable-dragging {
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
+}
+.hovered {
+    background: none repeat scroll 0 0 aqua;
+}

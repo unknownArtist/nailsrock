@@ -1,0 +1,78 @@
+
+
+<div id="wrapper">
+<div id ="contentarea">
+
+<h1>Welcome to VIP Points</h1>
+
+
+<h3>Vip Reward History</h3>
+
+<style type="text/css">
+
+	#reward-table td {
+	   
+       text-align: center;
+       padding: 5px;
+	}
+</style>
+
+<table class="sortable" id="reward-table">
+     <thead class="titlestrip">
+        <th style="width: 50px;" > <div class="titles" style="width: 20px;">No</div> </th>
+        <th> <div class="titles">Transcation Date</div>   </th>
+        <th> <div class="titles" style="width: 80px;">Customer</div>   </th>
+        <th style="width: 50px;"> <div class="titles"  style="width: 50px;">Point</div> </th>
+        <th> <div class="titles" style="text-align: center; width: 80px;">Type</div> </th>
+        
+         <th> <div class="titles">Note</div> </th>
+       
+     </thead>
+     
+<tbody>
+
+    <?php
+     function USAToMySQLDate($usa_date){
+    
+	list($m,$d,$y)=explode('-',$usa_date);
+        
+      return  $date="20".$y."-".$m."-".$d;
+}
+ function MySQLToUSADate($mysql_date){
+    
+	list($y,$m,$d,)=explode('-',$mysql_date);
+        
+      return  $date=$m.'-'.$d.'-'.substr($y,-2,2);
+}
+    $i=1;
+     foreach($this->r_data as $reward): ?>
+    
+<tr style="margin: 5px;">
+	<td> <?php echo $i; ?></td>
+	<td> <?php    echo MySQLToUSADate($reward['date'])?>&nbsp;</td>
+    <td><?php  echo $reward['firstName']; ?></td>
+	<td> <?php echo $reward['rewardPoints']?>&nbsp;</td>
+	<td> <?php echo $reward['type']?>&nbsp;</td>
+   <td>   <?php echo $reward['note']?>&nbsp;          </td>
+
+
+   
+  <?php
+
+ ?>   </tr>  <?php
+ 
+ $i++;
+  endforeach; ?>
+
+
+
+</tbody>
+     
+     
+     
+     </table>
+
+
+
+</div>
+</div>

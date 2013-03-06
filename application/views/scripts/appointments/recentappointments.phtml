@@ -1,0 +1,193 @@
+  <script type="text/javascript">
+  $(function(){
+
+    $("button, input[type='button']").click(function(){
+
+      return false;
+      
+    });
+  });
+</script>
+<style type="text/css">
+.dijitReset  {
+
+   padding: 2px;
+}
+.odd {
+   background: #ccc;
+}
+
+</style>
+<div id="wrapper">
+   <div id="operataion">
+  	<h1>Operations</h1>
+
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+
+					                        
+<a id="couponsFooter" href="/manage/coupons">Coupons</a>
+
+<a href="<?php  echo BASE_URL; ?>appointments/recentappointments">Reports</a> 
+     
+					     </div>
+  <div id="contentarea">
+  	<h1>Recent Appointments</h1>
+    
+    
+<div id="accountsmember_table" style="float: left;">
+
+     <table class="sortable">
+     <thead class="titlestrip">
+        <th> <div style="color: white; text-align: center; width: 30px; font-weight: bold;" >No.</div> </th>
+        <th> <div style="color: white; width: 120px; font-weight: bold;">Member Name</div>   </th>
+        <th> <div style="color: white; width: 100px; font-weight: bold;">Phone</div>        </th>
+        <th> <div style="color: white; width: 120px; font-weight: bold;">Technician</div>   </th>
+        <th> <div style="color: white;font-weight: bold; width: 100px;">Date</div>          </th>
+        <th>  <div style="color: white;width: 300px; font-weight: bold;">Note</div>         </th>
+     </thead>
+     
+<tbody>
+
+    <?php
+        $i=1;
+     foreach($this->paginator as $appointment):
+    
+
+     ?>
+    
+<tr>
+	<td style="text-align: center;"><?php  echo $i; ?></td>
+    
+	<td style="text-align: center;"> 
+    
+      <?php
+	
+
+    $firstName=$appointment['firstName'];
+    
+    $serviceName=$appointment['serviceName'];
+    
+    $from=$appointment['interval_time'];
+    $time=strtotime($from);
+       
+    $minutes=$appointment['duration'];
+    
+    $technicianName=$appointment['technician_name']; 
+    
+    $to=  date("h:i A", strtotime("+$minutes minutes", $time));
+        
+     $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
+     
+?>
+    <b>
+    
+    <label style="font-weight: bold;" title="<?php  echo $title; ?>"><?php  echo $appointment['firstName']; ?> </label>
+    </b>
+    
+     </td>
+     
+     <td><?php  echo $appointment['phCode'].$appointment['phone']; ?></td>
+     
+     
+     
+     <td style="color: black; text-align: center;"><?php  echo $appointment['technician_name']; ?></td>
+    
+	<td  style="text-align: center;">  <?php  echo date('m-d-Y',strtotime($appointment['date'])); ?>  </td>
+
+	<td style="text-align: center;">
+ <?php  echo $appointment['note']; ?> <br />
+ 
+ <a href="<?php $this->baseUrl() ?>/appointments/delete-recent-appointment/id/<?php  echo $appointment['id']; ?>/from/report">
+ 
+    <button style="margin-left: 10px;" value="<?php  echo $appointment['id']; ?>">
+ Delete</button>
+  </a>
+
+ 
+  <button style="margin-left: 10px;" class="dlg-bt" value="<?php  echo $appointment['id']; ?>">
+ 
+  <input type="hidden" name="" value="<?php  echo $appointment['note']; ?>"  class="appointmnet_note_<?php  echo $appointment['id']; ?>" />
+   Add/Edit </button>
+    
+    </td>
+  </tr>  <?php
+ 
+ $i++;
+  endforeach; ?>
+
+</tbody>
+     </table>
+     <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml'); ?>
+</div>
+
+     
+  	<div >
+
+		<div class="clear"></div>
+	</div>
+	
+	<div id="editprofile">
+	<div class="accountbg"> 
+
+
+
+  </div>
+ 
+  </div>
+  <?php  // echo $this->paginationControl($this->allAppointments, 'Sliding', 'pagination.phtml');
+   ?>
+  </div>
+  </div>
+  
+   
+  
+  <div class="dlg" style="display: none;">
+  
+  
+  <form name="form" id="form" method="post" enctype="application/x-www-form-urlencoded"
+   action="<?php  echo $this->baseUrl(); ?>/appointments/saverecentappointments   ">
+
+
+            <input type="hidden" name="appointmnet_id" value="" id="appointmnet_id" class="" />
+            
+            
+            <input type="text" name="note" id="appointmnet_note" class="" value="" />
+            
+           <input style="float: right; " type="submit" name="submit" value="Submit" class="" id="" />
+
+  </form>
+  
+  </div>
+  
+  <script type="text/javascript">
+  
+      	jQuery( '.dlg-bt' ).click(function (){
+
+
+
+      var id=jQuery(this ).val();
+            
+      jQuery( "#appointmnet_id" ).val( id );      
+
+            jQuery( "#appointmnet_note" ).val(jQuery( '.appointmnet_note_'+id ).val());
+             
+
+         jQuery( '.dlg' ).dialog({title:'Add/Edit Note for Appointment',height:150,width:400,show: "blind",hide: "explode"});
+    
+        });
+
+</script>
+  

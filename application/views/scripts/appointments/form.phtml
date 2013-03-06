@@ -1,0 +1,193 @@
+<style type="text/css">
+<!--
+	.apointment_colors div, .apointment_colors label{
+	   float: left;
+	}
+-->
+</style>
+<div style="margin:5 auto; text-align: center; height: 20px; width: 200px; ">
+<img src="<?php  echo $this->baseUrl(); ?>/images/ajax-loader.gif" id="ajax-bar" style=" display: none;"/>
+</div>
+<div id="wrapper">
+<div id ="appointments">
+<table>
+<tr>
+	<td><div style="height: 40px; width: 40px; background-color: #BFBF00; margin-left: 50px;"></div></td>
+	<td><div style="height: 40px; width: 40px; background-color: #DBDBDB; margin-left: 50px;"></div></td>
+	<td><div style="height: 40px; width: 40px; background-color: #75CC8B; margin-left: 50px;"></div></td>
+</tr>
+<tr>
+	<td><label style="float: left;">Available</label></td>
+	<td><label style="float: left;">Booked</label></td>
+	<td><label style="float: left;">No Service</label></td>
+</tr>
+</table>
+
+<div class="apointment_colors">
+
+
+
+
+
+</div>
+<br />
+<h1>Appointments Page </h1>
+     <form onsubmit="return false;" method="post" 
+     action="<?php  echo $this->baseUrl(); ?>/appointments/makeappointment" id="appointment-form">
+     
+     
+    <?php echo $this->form->memberID->render(); ?>
+	<?php echo $this->form->firstName->render(); ?>
+
+	<?php echo $this->form->lastName->render(); ?>
+	<?php echo $this->form->phCode->render(); ?>
+	<?php echo $this->form->phone->render(); ?>
+
+    <?php echo $this->form->serviceID->render(); ?>
+    
+    
+    <?php echo $this->form->date->render(); ?>
+	<div style=" clear:both;"></div>
+<!--
+	<select type="selectbox" name="members" id ="members">
+    	<?php foreach($this->members as $data2):?>
+      		<option value=<?php echo $data2["memberID"];?>><?php echo $data2["firstName"];?></option>
+     	<?php endforeach; ?>
+    </select>
+
+
+    <select type="selectbox" name="services" id ="services">
+    	<?php foreach($this->services as $data1):?>
+      		<option value=<?php echo $data1["serviceID"];?>><?php echo $data1["serviceName"];?></option>
+     	<?php endforeach; ?>
+    </select>
+-->
+<div id="technitian_div">
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<br />
+<br />
+<br />
+<input type="reset" value="Reset" id="reset" />
+<br />
+<br />
+<br />
+<br />
+<input type="submit" value="Book Appointment" id="submit" />
+<br />
+</form>
+
+
+</div>
+</div>
+
+          
+<script type="text/javascript">
+
+	jQuery( ".date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    
+    
+    
+    
+    jQuery(document).ajaxStart( function (){
+       
+        jQuery ('#ajax-bar').show();
+} );
+    
+    
+      
+    jQuery(document).ajaxStop( function (){
+       
+        jQuery ('#ajax-bar').hide();
+} );
+    
+    
+    
+    	jQuery( '#memberID' ).change(function (){
+    	   
+    	 
+        var id=jQuery(this).val();
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadcustomer/format/json/id/'+id,
+  success: function(data) {
+    //jQuery('.result').html(data);
+    //alert(data.email);
+    jQuery('#firstName').val(data.firstName );
+      jQuery('#lastName').val(data.lastName );
+        jQuery('#email').val(data.email );
+          jQuery('#phone').val(data.phone );
+    
+  }
+});
+
+        });
+        
+        
+        
+        
+     
+    	jQuery( '#date' ).change(function (){
+    	   
+    	 
+        var date=jQuery(this).val();
+    
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadtechnitiantable/format/html/date/'+date,
+  success: function(data) {
+    jQuery('#technitian_div').html(data);
+
+    
+  }
+});
+
+        });
+        
+        
+           
+        
+        
+        
+        
+        
+       	jQuery( '#submit' ).click(function (){
+    	   
+
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/makeappointment',
+  data:jQuery('#appointment-form').serialize(), 
+    type: "POST",
+  success: function(data) {
+    //jQuery('.result').html(data);
+   
+   if ( data.status==1 ) {
+    alert("Success");
+   } else {
+       alert("failure");
+   }
+
+
+    
+  }
+});
+
+        });     
+        
+        
+        
+</script>
+
+
+
+

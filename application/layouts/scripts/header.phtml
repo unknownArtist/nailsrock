@@ -1,0 +1,409 @@
+<?php header("Content-type: text/html; charset=utf-8");
+header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); 
+header('Last-Modified: ' . gmdate( 'D, d M Y H:i:s') . ' GMT'); 
+header('Cache-Control: no-store, no-cache, must-revalidate'); 
+header('Cache-Control: post-check=0, pre-check=0', false); 
+header('Pragma: no-cache'); 
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"
+        "http://www.w3.org/TR/REC-html40/strict.dtd">
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="author" content="lolkittens" />
+
+	<?php  echo $this->headTitle(); ?>
+    
+    
+<!-- Reset CSS -->
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/reset.css" />
+ <script src="<?php echo BASE_URL; ?>jquery/jquery-1.7.2.min.js"></script>
+
+<script src="<?php echo BASE_URL; ?>jquery/jquery-ui-1.8.21.custom.min.js"></script>
+
+
+<script src="<?php echo BASE_URL; ?>jquery/jquery.ui.touch-punch.min.js"></script>
+
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>jquery/jquery-ui-1.8.21.custom.css" />
+
+
+
+<!-- pNotify  -->
+
+	<script type="text/javascript" src="<?php echo BASE_URL; ?>/jquery/plugins/pnotify/jquery.pnotify.min.js"></script>
+	<link href="<?php echo BASE_URL; ?>/jquery/plugins/pnotify/jquery.pnotify.default.css" media="all" rel="stylesheet" type="text/css" />
+	<!-- Include this file if you are using Pines Icons. -->
+	<link href="<?php echo BASE_URL; ?>/jquery/plugins//pnotify/jquery.pnotify.default.icons.css" media="all" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="<?php echo BASE_URL; ?>/jquery/plugins/timepicker/jquery.timepicker.js"></script> 
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/jquery/plugins/timepicker/jquery.timepicker.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/jquery/plugins/timepicker/lib/base.css" /> 
+
+
+
+<!--      Importing Table shorter         -->
+<script type="text/javascript" src="<?php echo BASE_URL; ?>/jquery/plugins/tableshorter/jquery.tablesorter.min.js"></script>
+
+
+
+
+
+<!--         Importing custom js and CSS -->
+
+<script type="text/javascript" src="<?php echo BASE_URL; ?>js/main1.js"></script>
+
+<!-- Custom Css-->
+
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>css/main.css" />
+
+
+</head>
+<body>
+<div id="header">
+
+
+
+<?php
+	if (! My_Auth::getInstance()->isLoggedIn() ) {
+	   ?>
+        
+ <table id="logo-menu">
+<tr>
+	<td id="logocontainer"><a href="http://www.nailsrock.biz/" title="Nailsrock"><img id="logo" src="nailsrock-logo.png"  /></a></td>
+	<td> 
+	<div id="menu">
+ <ul>
+        <li><a href="http://www.nailsrock.biz/default.html">HOME</a></li>
+        <li><a href="http://www.nailsrock.biz/aboutus.html">ABOUT US</a></li>
+        <li><a href="http://www.nailsrock.biz/services.html">SERVICES</a></li>
+         <li><a href="http://www.nailsrock.biz/contactus.html">CONTACT US</a></li>
+        
+          <li><a href="http://admin.nailsrock.biz/giftcardext">BUY GIFT CARD</a></li>
+       
+        <li><a href="http://admin.nailsrock.biz/vipmember">LOGIN</a></li>
+ </ul>
+ </td>
+</tr>
+</table>
+ 
+       <?php
+	}
+?>
+
+<?php if(My_Auth::getInstance()->isVIPMember()): ?>
+	 <div id="menu">
+              <ul>
+               
+  
+
+                <li> 
+                  <a id="appointmentFooter" href="/appointments/index">
+                       Appointments</a>
+                </li>
+              
+              <?php
+	if (  My_Auth::getInstance()->isVIPMember()  ) {
+ ?>    
+                <li> <a id="couponsFooter" href="/manage/get-coupon">VIP Coupons</a></li>
+                
+                  <li> <a id="couponsFooter" href="/vipmember/vip-points">VIP Points</a></li>
+                  
+                    <li> <a href="<?php  echo BASE_URL; ?>giftcard">Gift Card</a> </li>
+          
+            <?php
+	} else {
+	   
+	if (  My_Auth::getInstance()->isAdmin()  )  {
+	   
+
+         ?>         <?php
+            
+            	}
+}
+?>
+
+            <li>
+            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'index', 'action'  => 'logout')); ?>">logout</a>
+                </li>
+      
+         
+
+            </ul>
+            </div>
+<?php  endif; ?> 
+
+
+    
+    <?php if(My_Auth::getInstance()->isAdmin()): ?>
+	 <div id="menu">
+              <ul>
+               
+                <li class="selected"> 
+                       <a id="accountsFooter" href="/member/accounts">
+                       Accounts</a>
+                </li>
+
+
+                <li> 
+                  <a id="appointmentFooter" href="/appointments/index">
+                       Appointments</a>
+                </li>
+                <li> <a id="operationFooter" href="/manage/operations">
+                       Operations</a>
+                </li>
+               
+            <!--
+  <li> <a id="couponsFooter" href="/manage/coupons">Coupons</a></li>
+       
+            <li> <a href="<?php  echo BASE_URL; ?>appointments/recentappointments">Reports</a> </li>
+              
+-->
+            
+            <li> <a href="<?php  echo BASE_URL; ?>appointments/points">Points</a> </li>
+             
+            <li> <a href="<?php  echo BASE_URL; ?>admin-giftcard">Gift Card</a> </li>
+             
+            <li>
+            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'index', 'action'  => 'logout')); ?>">logout</a>
+                </li>
+      
+         
+
+            </ul>
+            </div>
+<?php  endif; ?> 
+	   <?php  
+   
+   if ( My_Auth::getInstance()->isVIPMember() ){
+
+                $vipMemberId=My_Auth::getInstance()->getLoggedUser('memberID');
+                 
+                    $db=Zend_Db_Table::getDefaultAdapter();
+   
+   $viphistory = new Application_Model_Viprewardshistory();
+   $result=$db->query("SELECT vip_points AS points
+                       FROM `members`
+                       WHERE memberID =".$vipMemberId)->fetch(Zend_Db::FETCH_OBJ)->points;
+   
+          
+//	    echo '<pre>';
+//        print_r(  $db    );
+//        echo '</pre>';
+//        
+//        die('DEBUG');
+//                
+              ?>   
+              
+              
+              
+                
+<div style="margin-left: auto;margin-right: auto; text-align: center; width: 300px; ">
+
+    <div style="margin-left: auto;margin-right: auto; text-align: center; background: white; font-weight: bolder;
+    width: 60px; height: 30px; padding-top: 10px; float: left;">
+    <?php  echo $result; ?>
+
+    </div>
+       <div style="margin-left: auto;margin-right: auto; text-align: center; background: white; font-weight: bolder;
+    width: 120px; height: 30px; padding-top: 10px; float: left; margin-left: 20px; ">
+    
+   VIP POINTS
+    </div>
+    
+    
+</div>
+     
+     <?php    
+             }
+   
+
+    ?>
+    
+    
+</div>
+<div id=""  style="margin:5px auto; text-align: center; height: 20px; width: 200px;  ">
+<img src="<?php  echo BASE_URL; ?>/images/ajax-loader.gif" id="ajax-bar" style="display: none;"  />
+</div>
+
+<div id="message" style="margin:5 auto; text-align: center; height: 20px; width: 400px;" >
+</div>
+<div id="messages">
+
+<?php $flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger'); ?>
+<?php if ($flashMessenger->setNamespace('success')->hasMessages()): 
+?>
+
+    <div class="alert" id="success-msg" style="display: none;">
+    <?php foreach ($flashMessenger->getMessages() as $msg): ?>
+        <?php echo $msg."<br/>" ?>
+    <?php endforeach; ?>
+    </div>
+
+<script type="text/javascript">
+
+  $.pnotify.defaults.styling = "jqueryui";
+
+var success_msg=jQuery('#success-msg').text();
+ 
+$(function(){
+    $.pnotify({
+    title: 'Success',
+    text: success_msg,
+    type: 'success',
+      addclass: "stack-topleft",
+         animation: {
+        effect_in: 'show',
+        effect_out: 'slide'
+}
+ 
+    });
+	});
+
+
+</script> 
+    
+<?php endif; ?>
+
+<?php if ($flashMessenger->setNamespace('warning')->hasMessages()): ?>
+ 
+    <div class="alert alert-success" id="warning-msg" style="display: none;">
+    <?php foreach ($flashMessenger->getMessages() as $msg): ?>
+        <?php echo $msg ?>
+    <?php endforeach; ?>
+    </div>
+        
+<script type="text/javascript">
+
+var warning_msg=jQuery('#warning-msg').text();
+ 
+$(function(){
+    $.pnotify({
+    title: 'Warning',
+    text: warning_msg,
+     type: 'warning',
+      addclass: "stack-topleft",
+         animation: {
+        effect_in: 'show',
+        effect_out: 'slide'
+}
+ 
+    });
+	});
+
+
+</script>
+<?php endif; ?>
+
+<?php if ($flashMessenger->setNamespace('error')->hasMessages()): ?>
+    <div class="alert alert-error" id="error-msg" style="display: none;">
+    <?php foreach ($flashMessenger->getMessages() as $msg): ?>
+        <?php echo $msg ?>
+    <?php endforeach; ?>
+    </div>
+<script type="text/javascript">
+
+var success_msg=jQuery('#error-msg').text();
+ 
+$(function(){
+		$.pnotify({
+		title: "Error",
+        text: success_msg,
+        type: 'error',
+        addclass: "stack-topleft",
+         animation: {
+        effect_in: 'show',
+        effect_out: 'slide'
+}
+ 
+		});
+	});
+</script>
+<?php endif; ?>
+
+<?php if ($flashMessenger->setNamespace('information')->hasMessages()): ?>
+    <div class="alert alert-error" id="info-msg" style="display: none;" >
+    <?php foreach ($flashMessenger->getMessages() as $msg): ?>
+        <?php echo $msg ?> 
+    <?php endforeach; ?>
+    </div>
+        
+<script type="text/javascript">
+
+var success_msg=jQuery('#info-msg').text();
+ 
+$(function(){
+		$.pnotify({
+		title: "Information",
+        text: success_msg,
+        type:'info',
+        addclass: "stack-topleft",
+         animation: {
+        effect_in: 'show',
+        effect_out: 'slide'
+        
+        
+      }
+ 
+		});
+	});
+
+
+</script>
+<?php endif; ?>
+
+
+
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+<!--
+		jQuery(document).ready(function () {
+       
+    
+    
+    //      Time Picker
+    	$('.timepicker').timepicker({'step':15});
+        
+         	$('.datepicker').datepicker({dateFormat:"yy-mm-dd"});
+
+////////////////////////////////// Floating Menu //////////////////////////////////////////
+          	var name = "#floatMenu";
+        	var menuYloc = null;
+	
+			menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
+			$(window).scroll(function () { 
+				offset = menuYloc+$(document).scrollTop()+"px";
+				$(name).animate({top:offset},{duration:500,queue:false});
+			});
+//
+              ////////////////////////DatePicker for shop custom hours////////////////////////
+              
+       $("table.sortable").tablesorter();
+
+$.pnotify.defaults.styling = "jqueryui";
+         
+
+$.pnotify.defaults.styling = "jqueryui";
+         
+    
+    
+    
+    
+    
+    });
+-->
+
+</script>
+
+
+
+
+
+
+

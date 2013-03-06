@@ -1,0 +1,441 @@
+<style type="text/css">
+<!--
+	.apointment_colors div, .apointment_colors label{
+	   float: left;
+	}
+    
+
+    
+    
+    .available_td {
+    
+        min-width: 80px;
+        text-align: center;
+    }
+    .booked_td {
+         
+         min-width: 80px;
+        text-align: center;
+    }
+    .no_service_td {
+        min-width: 80px;
+        text-align: center;
+    }
+    
+ #floatMenu {
+    border: 1px solid black;
+    left: 50%;
+    margin-left: 360px;
+    padding: 10px;
+    position: absolute;
+    top: 285px;
+    width: 160px;
+}
+.blue {
+    background-color: #DFACDF;
+    color: #FF0080; 
+    
+}
+  .gray {
+    background-color: gray;
+    
+}  
+.draggable {
+    width: 100px;
+    height: 100px;
+    cursor: crosshair;
+    border: 1px solid;
+    
+}
+.dropable {
+    width: 400px;
+    height: 400px;
+    cursor: crosshair;
+    border: 1px dotted;
+    margin-left: 500px;
+    
+}
+.droparea {
+    width: 600px;
+    height: 600px;
+}
+-->
+</style>
+
+<script type="text/javascript">
+<!--
+	jQuery('.draggable').draggable({ 
+	   
+	   cursor: "crosshair",
+       snap: true,
+        helper: "original",
+         revert: true,
+          containment: '#droparea',
+       
+        });
+    
+    jQuery( '.dropable' ).droppable( {
+    accept: ".drop-box" ,
+        tolerance: 'touch',
+         over: function() {
+                       $(this).css('backgroundColor', '#cedae3');
+                },
+                out: function() {
+                        $(this).css('backgroundColor', '#a6bcce');
+                },
+                drop: function(event,ui) {
+                    
+                    
+
+                        ui.draggable.draggable( 'option', 'revert', false );
+                },
+                stop: function(event, ui) { $(this).parent() }
+
+                
+                });
+-->
+</script>
+
+
+<div id="wrapper">
+<div id ="appointments">
+ <form onsubmit="return false;" method="post" 
+     action="<?php  echo $this->baseUrl(); ?>/appointments/makeappointment" id="appointment-form" >
+     
+<div id="floatMenu">
+<table>
+        <tr>
+        <td colspan="2">
+        
+        
+        
+        
+        
+<input type="submit" value="Book Appointment" id="submit" />
+         </td>
+        </tr>
+        <tr>
+        <td colspan="2">
+        <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px; border: 1px #837066 solid;" class="available">
+                </div>
+            </td>
+            <td class="content">
+                = Available
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px; border: 1px #837066 solid;" class="booked">
+                </div>
+            </td>
+            <td class="content">
+                = Booked
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px;  border: 1px #837066 solid;" class="no_service">
+                </div>
+            </td>
+            <td class="content">
+                = No Service
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+<br />
+<h1>Appointments Page </h1>
+    
+    
+    <table id="appointment-table">
+    
+   
+   <tr>
+   
+   <td colspan="3" style="border-bottom: 1px solid black;">
+   
+    
+    
+    <?php echo $this->form->date->render(); ?>
+   
+   </td>
+   </tr>
+    
+<tr>
+	<td><?php echo $this->form->firstName->render(); ?></td>
+	<td>
+ 
+    <?php echo $this->form->memberID->render(); ?>
+	
+</td>
+	<td><input type="reset" value="Reset for New Customer" id="reset" /></td>
+</tr>
+<tr>
+	<td colspan="2"><?php echo $this->form->lastName->render(); ?></td>
+
+	<td></td>
+</tr>
+<tr>
+	<td colspan="2"> 
+	<label>Phone Number:</label> 
+	<?php echo $this->form->phCode->render(); ?>
+	
+<?php echo $this->form->phone->render(); ?></td>
+	<td></td>
+	
+</tr>
+
+<tr>
+<td colspan="3" style="border-top: 1px solid black;">
+
+    
+    
+    <?php echo $this->form->serviceID->render(); ?>
+    
+</td>
+</tr>
+</table>
+    
+    
+	<div style=" clear:both;"></div>
+<!--
+	<select type="selectbox" name="members" id ="members">
+    	<?php foreach($this->members as $data2):?>
+      		<option value=<?php echo $data2["memberID"];?>><?php echo $data2["firstName"];?></option>
+     	<?php endforeach; ?>
+    </select>
+
+
+    <select type="selectbox" name="services" id ="services">
+    	<?php foreach($this->services as $data1):?>
+      		<option value=<?php echo $data1["serviceID"];?>><?php echo $data1["serviceName"];?></option>
+     	<?php endforeach; ?>
+    </select>
+-->
+<div id="technitian_div">
+
+
+
+
+
+
+
+</div>
+
+<br />
+<br />
+<br />
+
+<br />
+</form>
+
+
+</div>
+</div>
+  
+<script type="text/javascript">
+
+	jQuery( ".date" ).datepicker({ dateFormat: 'mm/dd/yy' });
+    
+    
+    
+    
+    jQuery(document).ajaxStart( function (){
+       
+        jQuery ('#ajax-bar').show();
+        jQuery ('#ajax-img').show();
+} );
+    
+    
+      
+    jQuery(document).ajaxStop( function (){
+       
+        jQuery ('#ajax-bar').hide();
+} );
+    
+      
+    jQuery(document).ajaxComplete( function (){
+
+        jQuery ('#ajax-bar').hide();
+} );
+    
+      
+    jQuery(document).ajaxSuccess( function (){
+
+        jQuery ('#ajax-bar').hide();
+} );
+    
+      
+    jQuery(document).ajaxError( function (){
+      
+        jQuery ('#ajax-bar').hide();
+} );
+    
+    
+  
+	$(function() {
+
+		$( "#memberID" ).autocomplete({
+			source: '/appointments/autocompletecustomer',
+            minLength: 1,
+			close: function( event, ui ) {
+			 
+		        var id=jQuery(this).val();
+                
+              //  alert(id);
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadcustomer/format/json/id/'+id,
+  success: function(data) {
+    jQuery('.result').html(data);
+   
+   
+    jQuery('#firstName').val(data.firstName );
+      jQuery('#lastName').val(data.lastName );
+        jQuery('#email').val(data.email );
+          jQuery('#phone').val(data.phone );
+    
+  }
+});
+
+        
+			}
+		});
+	});
+
+    
+
+   function loadAppointments( ){
+	   
+       
+       var serviceID= jQuery( '#serviceID' ).val();
+       var date=jQuery( '#date' ).val();
+       
+       
+        
+    //    alert(date+serviceID);
+    
+       
+       if (  !date ){
+        return;
+       }
+    	// alert("ok");
+         
+        var date=jQuery('#date').val();
+        var serviceID=jQuery('#serviceID').val();
+        
+        if (!serviceID) {
+             loadAppointmentsToday();
+             return;
+        }
+       
+       var token=Math.random();
+   var url= <?php echo $this->baseUrl() ?>'/appointments/loadtechnitiantable/date/'+date+"/serviceID/"+serviceID+"/token/"+token;
+         
+         
+          jQuery.ajax({
+  url: url,
+  success: function(data) {
+    jQuery('#technitian_div').html(data);
+//alert("ok");
+    
+  },
+    beforeSend: function(data) {
+    jQuery('#technitian_div').html('');
+
+    
+  }
+});
+}     
+        
+        
+     
+    	jQuery( '#serviceID' ).change(function (){
+    
+          loadAppointments();
+   
+        });
+        
+        
+    	jQuery( '#date' ).change(function (){
+    
+          loadAppointments();
+   
+        });
+        
+        
+       	jQuery( '#submit' ).click(function (){
+    	   
+           if(!jQuery('#firstName').val()) {
+            alert("Select or Enter Member details");
+            
+            return;
+           }
+           
+             if(jQuery('input:checkbox:checked').length==0) {
+            alert("Select A Service to make appointment");
+            
+            return;
+           }
+           
+
+           
+
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/makeappointment',
+  data:jQuery('#appointment-form').serialize(), 
+    type: "POST",
+  success: function(data) {
+    //jQuery('.result').html(data);
+ //  alert(data);
+ loadAppointments();
+
+    
+  }
+
+
+});
+
+        });     
+        
+        
+           function loadAppointmentsToday( ){
+	   
+      
+       
+       var token=Math.random();
+   var url= <?php echo $this->baseUrl() ?>'/appointments/loadtechnitiantabletoday/token/'+token;
+         
+         
+          jQuery.ajax({
+  url: url,
+  success: function(data) {
+    jQuery('#technitian_div').html(data);
+
+    
+  },
+    beforeSend: function(data) {
+    jQuery('#technitian_div').html('');
+
+    
+  }
+});
+}     
+        
+      loadAppointmentsToday();
+      
+      
+</script>
+
+
+
+

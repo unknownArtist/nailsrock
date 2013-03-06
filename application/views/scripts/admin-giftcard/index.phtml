@@ -1,0 +1,345 @@
+<div id="wrapper">
+<div id ="contentarea" style="min-height:300px;">
+<h1> Gift Cards Manager </h1>
+
+<br />
+
+<p>Enter Gift Card No. to Active Gift Card or Subtract Gift Balance </p>
+
+         <form method="post" action="<?php  echo BASE_URL; ?>admin-giftcard/operations">
+           <input type="text" name="cardID" id="cardID" value="" class="reset" />
+
+<br />
+   <div id="card_op_div">
+         
+         
+         </div>
+         </form>
+         
+         
+      
+<br />
+<br />
+
+
+<?php
+ function USAToMySQLDate($usa_date){
+    
+	list($m,$d,$y)=explode('-',$usa_date);
+        
+      return  $date="20".$y."-".$m."-".$d;
+}
+ function MySQLToUSADate($mysql_date){
+    
+	list($y,$m,$d,)=explode('-',$mysql_date);
+        
+      return  $date=$m.'-'.$d.'-'.substr($y,-2,2);
+}
+?>
+<style type="text/css">
+<!--
+	#gift-card-table td{
+	   
+       text-align: center;
+	}
+-->
+</style>
+<div>
+<!--
+
+<a href="<?php $this->baseUrl() ?>admin-giftcard/approve-giftcard"> Approve Gift Card </a>
+-->
+<a href="">   </a>
+
+</div>
+<?php
+	$paginator=$this->paginator;
+
+if ( count($paginator) ) {
+?>
+<table class="sortable" id="gift-card-table">
+     <thead class="titlestrip">
+        <th style="width: 20px;" > <div class="titles" style="width: 20px;">ID</div> </th>
+        <th> <div class="titles" style="width: 100px;">Date  Created</div>   </th>
+       
+        <th style="width: 150px;"> <div class="titles"  style="width: 150px;">Card No</div> </th>
+       
+        <th style="width: 70px;"> <div class="titles"  style="width: 70px;">Card Balance</div> </th>
+        <th style="width: 80px;">  <div class="titles" style="text-align: center; width: 80px;" ">Created By</div> </th>
+        
+         <th> <div class="titles">Note</div> </th>
+          <th style="width: 20px;" > <div class="titles" style="width: 20px;">Active</div> </th>
+       
+          <th>  <div class="titles">Operation</div> </th>
+     </thead>
+     
+<tbody>
+
+<?php
+
+foreach ( $paginator as $row     ) {
+	   
+       
+	 ?>   
+  
+     <tr>
+     
+     <td>     <?php  echo $row->id; ?>           </td>
+     
+     <td>      <?php  echo  MySQLToUSADate($row->date_created); ?>      </td>
+     
+     
+       <td>       <?php  echo $row->card_no; ?>    </td>
+       
+      <td>       $<?php  echo $row->points; ?>   </td>
+    
+    
+     <td>     <?php  echo $row->firstName; ?>         </td>
+     
+     
+
+      <td>     <?php  echo $row->note; ?>           </td>   
+           <td>     <?php 
+     
+     if ( $row->active ) {
+echo "YES";
+	} else {
+echo "NO";
+}
+
+     ?>         </td>
+      <td>   
+      
+      
+      
+          <a href=" <?php  echo BASE_URL; ?>/admin-giftcard/transactions/id/<?php  echo $row->id ; ?> "> Transactions </a>
+          
+          &nbsp; <br />
+      
+          <a href=" <?php  echo BASE_URL; ?>/giftcard/download/id/<?php  echo $row->id ; ?> ">  Download  </a>
+          
+          &nbsp;  <a href="<?php  echo BASE_URL; ?>/admin-giftcard/delete/id/<?php  echo $row->id ; ?>"> Delete  </a>
+      
+        <!--
+  &nbsp;
+      
+          &nbsp;  <a href="<?php  echo BASE_URL; ?>/giftcard/active/id/<?php  echo $row->id ; ?>"> active  </a>
+      
+      
+-->
+      
+      </td>
+  
+     
+     </tr>
+     
+       <?php
+    
+    }
+ ?>  
+ </tbody>
+ 
+ </table>
+ 
+  <?php  echo $this->paginationControl($this->Members, 'Sliding', 'pagination.phtml'); ?>
+  
+ 
+    <?php
+	} else {
+ ?>  <h1>No Gift Card </h1>   <?php
+}
+
+	
+    
+    
+    
+
+?>
+
+<div id="activate_div" style="display: none;">
+<p> Card is not Active </p>
+ <input type="hidden" name="card_id" id="card_id" class="" value="" />
+           
+<input type="hidden" name="type" value="activate" id="" class="" />
+           <input type="submit" name="" value="Activate Card" class="" id="" />
+</div>
+
+<div id="subtract_div" style="display: none;">
+
+<input type="hidden" name="type" value="subtract" id="" class="" />
+
+<h2> Balance Subtraction: </h2> 
+<br />
+<b>Balance to be Subtracted:</b>
+            <input type="text" name="subtract_amount" id="" class="" value="" />
+            
+              <input type="hidden" name="card_id" id="card_id" class="" value="" />
+              
+              
+              
+              
+              
+              <b>Note:</b>
+              
+                <input type="text" name="note" id="" class="" value="" />
+            
+            
+           
+           <input type="submit" name="submit" value="Subtract" class="" id="" />
+           
+           
+<br />
+<br />
+<br />
+
+<table>
+<tr>
+	<td colspan="2">  <h2> Card Details and Operations </h2>         </td>
+
+</tr>
+<tr>
+	<td>  <b>Card Balance:</b> </td>
+	<td> <b id="points"></b> $ </td>
+</tr>
+
+<tr>
+	<td> <b>Date Created:</b>  </td>
+	<td>  <b id="date_created"></b>  </td>
+</tr>
+
+<tr>
+	<td>  
+
+<b>Created By:</b>
+ </td>
+	<td>      <b id="firstName"></b> 
+  </td>
+</tr>
+
+<tr>
+<td><b>Note:</b>  </td>
+
+<td>   <b id="note"></b>    </td>
+</tr>
+<tr>
+	<td> <b>Active:</b>  </td>
+	<td>  <b id="active"></b>    </td>
+</tr>
+
+<tr>
+	<td> <b>Operations:</b>  </td>
+	<td> 
+    
+<div id="operataion_hrefs">
+
+     
+          <a href="<?php  echo BASE_URL; ?>/admin-giftcard/transactions/id/"> Transactions </a>
+          
+          &nbsp;
+      
+          <a href="<?php  echo BASE_URL; ?>/giftcard/download/id/">  Download  </a>
+          
+          &nbsp;  <a href="<?php  echo BASE_URL; ?>/admin-giftcard/delete/id/"> Delete  </a>
+</div>
+      
+       </td>
+</tr>
+
+
+</table>
+     
+</div>
+   
+
+
+         
+
+
+
+
+<script type="text/javascript">
+
+
+		jQuery( "#cardID" ).autocomplete({
+			source: 'http://admin.nailsrock.biz/admin-giftcard/autocompletecard',
+            minLength: 1,
+			close: function( event, ui ) {
+			 
+             
+           jQuery('#card_op_div').html( ''  );
+           
+		        var id=jQuery(this).val();
+                
+              //  alert(id);
+                
+                              //  alert(id);
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/admin-giftcard/loadcard/format/json/id/'+id,
+  success: function(data) {
+
+        jQuery('#card_op_div').html( ''  );
+           
+
+      if ( data.active==0 ) {
+
+                jQuery('#card_op_div').html( jQuery('#activate_div').html()  );
+	} else {
+	   
+       
+           jQuery('#card_op_div').html( jQuery('#subtract_div').html()  );
+           
+            jQuery('#card_op_div #firstName').text( data.firstName );
+
+      jQuery('#card_op_div #date_created').text( data.date_created );
+
+ 
+ 
+ 
+         
+ 
+         jQuery('#card_op_div #points').text( data.points );
+         
+           jQuery('#card_op_div #note').text( data.note );
+           
+             jQuery('#card_op_div #active').text( "YES" );
+             
+    
+     
+           jQuery('#card_op_div #operataion_hrefs a').each(function (index,element){
+            
+            var id=data.id ;
+            
+            var new_attr=  $(element).attr('href')+id;
+            
+         //   alert(""+new_attr);
+            
+          $(element).attr ('href',new_attr );
+          
+            
+
+});
+          
+ 
+}
+
+
+
+ jQuery('#card_op_div #card_id').val( data.id );
+ 
+ 
+ 
+    
+  }
+});
+
+
+        
+			}
+		});
+
+
+</script>
+</div>
+</div>
+
+

@@ -1,0 +1,405 @@
+<?php
+
+class ManageController extends Zend_Controller_Action
+{ 
+    public function init()
+    {
+
+    }
+
+    public function operationsAction()
+    {
+      
+    }
+
+    public function indexAction()
+    {
+
+    }
+
+
+   public function addServicesAction()
+     {
+      
+     $this->view->form = $form =  new Application_Form_Service();
+
+      if ($this->getRequest()->isPost()) 
+          {            
+            $formData = $this->getRequest()->getPost();
+                
+                if ($form->isValid($formData)) 
+                {                       
+                      $Services = new Application_Model_Services();
+                      $Services->insert(array(
+
+                        'serviceName' => $form->getValue('serviceName'),
+                        'duration'    => $form->getValue('duration'),
+                       )
+                      );
+                      $form->reset();
+                      //$this->_redirect('manage/services');
+                      $this->view->successMsg = "Service Added Successfully";
+                }else
+                {
+                    $form->populate($formData);
+                    
+                }
+            }else
+            {
+
+            }
+     }
+
+     public function servicesAction()
+     {
+        $Services = new Application_Model_Services();
+        
+        $getConnect = Zend_Db_Table::getDefaultAdapter();
+        $getDbTable = new Zend_Db_Select($getConnect);
+
+
+        $getservices = $getDbTable->from('services');
+        $getResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($getservices));
+
+        $Paginatedresult = $getResult->setItemCountPerPage(10)
+                                     ->setCurrentPageNumber($this->_getParam('page',1));
+        $this->view->Services = $Paginatedresult;
+    }
+
+  
+
+       public function shopHoursAction()
+     {
+          
+
+             $form            = new Application_Form_Shophours();
+             $formCustomHours = new Application_Form_Shopcustomhours();
+             $this->view->formCustomHours = $formCustomHours;
+             $this->view->form = $form;
+
+            $shophours = new Application_Model_Shophours();
+             if ($this->getRequest()->isPost() && $this->view->form->isValid($this->_getAllParams()))
+           {
+
+                ///////////////sunday//////////////////////////////////
+                      $sundata = array(
+
+                                'day'             =>    'Sunday',
+                                'closeAllDay'     =>    $form->getValue('sunCloseAllDay'),
+                                'open'            =>    $form->getValue('sunOpen'),
+                                'close'           =>    $form->getValue('sunClose'),
+
+                            ); 
+                      $shophours->insert($sundata);
+
+                 //////// for monday///////////////////////////////////
+                      $mondata = array(
+
+                                'day'             =>    'Monday',
+                                'closeAllDay'     =>    $form->getValue('monCloseAllDay'),
+                                'open'            =>    $form->getValue('monOpen'),
+                                'close'           =>    $form->getValue('monClose'),
+
+                            ); 
+                     
+                      $shophours->insert($mondata);
+
+                      ///////////////////tuesday////////////////////////////////
+                      $tuedata = array(
+
+                                'day'             =>    'Tuesday',
+                                'closeAllDay'     =>    $form->getValue('tueCloseAllDay'),
+                                'open'            =>    $form->getValue('tueOpen'),
+                                'close'           =>    $form->getValue('tueClose'),
+
+                            ); 
+                      $shophours->insert($tuedata);
+
+                      /////////////////////////wednesday///////////////////////////
+                      $weddata = array(
+
+                                'day'             =>    'Wednesday',
+                                'closeAllDay'     =>    $form->getValue('wedCloseAllDay'),
+                                'open'            =>    $form->getValue('wedOpen'),
+                                'close'           =>    $form->getValue('wedClose'),
+
+                            ); 
+                      $shophours->insert($weddata);
+
+
+                      ///////////////////thursday////////////////////////////////////
+                      $thusdata = array(
+
+                                'day'             =>    'Thusday',
+                                'closeAllDay'     =>    $form->getValue('thusCloseAllDay'),
+                                'open'            =>    $form->getValue('thusOpen'),
+                                'close'           =>    $form->getValue('thusClose'),
+
+                            ); 
+                      $shophours->insert($thusdata);
+
+
+                      //////////////////friday//////////////////////////////////////
+                      $fridata = array(
+
+                                
+                                'day'             =>    'Friday',
+                                'closeAllDay'     =>    $form->getValue('friCloseAllDay'),
+                                'open'            =>    $form->getValue('friOpen'),
+                                'close'           =>    $form->getValue('friClose'),
+
+                            ); 
+                      $shophours->insert($fridata);
+
+                      //////////////////////////saturday///////////////////////////////
+                      $satdata = array(
+
+                                
+                                'day'             =>    'Saturday',
+                                'closeAllDay'     =>    $form->getValue('satCloseAllDay'),
+                                'open'            =>    $form->getValue('satOpen'),
+                                'close'           =>    $form->getValue('satClose'),
+
+                            ); 
+                      $shophours->insert($satdata);
+                      $form->reset();     
+                }
+                
+
+    //          $form =  new Application_Form_Shopcustomhours();
+    //          $this->view->form = $form;
+
+            $shopcustomhours = new Application_Model_Shopcustomhours();
+    //          if ($this->getRequest()->isPost() && $this->view->form->isValid($this->_getAllParams()))
+    //       {
+    //         $h_data = array(
+
+    //                             'date'            =>    $form->getValue('date'),
+    //                             'closeAllday'     =>    $form->getValue('closeAllDay'),
+    //                             'start'           =>    $form->getValue('start'),
+    //                             'end'             =>    $form->getValue('end'),
+    //                             'comments'        =>    $form->getValue('comments'),
+    //                                      ); 
+
+    //         $shopcustomhours->insert($h_data);
+    //       }
+    //         $form->reset();
+            $data = $shopcustomhours->fetchAll($where = null,'ID DESC','4,0');
+            
+             $this->view->data = $data; 
+
+    }
+  
+      public function shopCustomHoursAction()
+     
+     {
+
+
+             $form =  new Application_Form_Shopcustomhours();
+             $this->view->form = $form;
+
+            $shopcustomhours = new Application_Model_Shopcustomhours();
+             if ($this->getRequest()->isPost() && $this->view->form->isValid($this->_getAllParams()))
+          {
+            $h_data = array(
+
+                                'date'            =>    $form->getValue('datepicker'),
+                                'closeAllday'     =>    $form->getValue('closeAllDay'),
+                                'start'           =>    $form->getValue('shopCustomHoursOpen'),
+                                'end'             =>    $form->getValue('shopCustomHoursClose'),
+                                'comments'        =>    $form->getValue('comments'),
+                            ); 
+         
+
+            $shopcustomhours->insert($h_data);
+            //$this->_redirect('manage/shop-hours');
+          }
+            $form->reset();
+           
+
+
+
+}
+   
+
+     public function addTechnicianAction()
+     {
+      $form = new Application_Form_Technician();
+      $this->view->form = $form;
+
+      $Services = new Application_Model_Services();
+      $this->view->Services = $Services->fetchAll()->toArray();
+
+
+      if ($this->getRequest()->isPost()) 
+          {            
+            $formData = $this->getRequest()->getPost();
+                
+                if ($form->isValid($formData)) 
+                {                       
+                      $Technician = new Application_Model_Technician();
+
+                      $u_data = array(
+
+                                'name'    =>    $form->getValue('name'),
+                                'status'  =>    '1',
+                            ); 
+                      $Technician->insert($u_data);
+
+                      $select = $Technician->select()       
+                             ->from($Technician)
+                             ->order('technicianID desc');
+
+                      $technicianid = $Technician->fetchRow($select)->toArray();
+
+                      $Technicianhours = new Application_Model_Technicianhours();
+
+                      //////// for monday
+                      $mondata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Monday',
+                                'closeAllDay'     =>    $form->getValue('monCloseAllDay'),
+                                'open'            =>    $form->getValue('monOpen'),
+                                'close'           =>    $form->getValue('monClose'),
+
+                            ); 
+                     
+                      $Technicianhours->insert($mondata);
+
+                      $tuedata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Tuesday',
+                                'closeAllDay'     =>    $form->getValue('tueCloseAllDay'),
+                                'open'            =>    $form->getValue('tueOpen'),
+                                'close'           =>    $form->getValue('tueClose'),
+
+                            ); 
+                      $Technicianhours->insert($tuedata);
+
+                      $weddata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Wednesday',
+                                'closeAllDay'     =>    $form->getValue('wedCloseAllDay'),
+                                'open'            =>    $form->getValue('wedOpen'),
+                                'close'           =>    $form->getValue('wedClose'),
+
+                            ); 
+                      $Technicianhours->insert($weddata);
+
+                      $thusdata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Thusday',
+                                'closeAllDay'     =>    $form->getValue('thusCloseAllDay'),
+                                'open'            =>    $form->getValue('thusOpen'),
+                                'close'           =>    $form->getValue('thusClose'),
+
+                            ); 
+                      $Technicianhours->insert($thusdata);
+
+                      $fridata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Friday',
+                                'closeAllDay'     =>    $form->getValue('friCloseAllDay'),
+                                'open'            =>    $form->getValue('friOpen'),
+                                'close'           =>    $form->getValue('friClose'),
+
+                            ); 
+                      $Technicianhours->insert($fridata);
+
+                      $satdata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Saturday',
+                                'closeAllDay'     =>    $form->getValue('satCloseAllDay'),
+                                'open'            =>    $form->getValue('satOpen'),
+                                'close'           =>    $form->getValue('satClose'),
+
+                            ); 
+                      $Technicianhours->insert($satdata);
+
+                      $sundata = array(
+
+                                'technicianID'    =>    $technicianid['technicianID'],
+                                'day'             =>    'Sunday',
+                                'closeAllDay'     =>    $form->getValue('sunCloseAllDay'),
+                                'open'            =>    $form->getValue('sunOpen'),
+                                'close'           =>    $form->getValue('sunClose'),
+
+                            ); 
+                      $Technicianhours->insert($sundata);
+
+
+
+        
+                      $form->reset();
+                      //$this->_redirect('manage/services');
+                      $this->view->successMsg = "Service Added Successfully";
+
+                }
+                else
+
+                {
+                    $form->populate($formData);
+                    
+                }
+            }else
+            {
+
+            }
+
+     }
+
+ public function couponsAction()
+     {
+     $form = new Application_Form_Coupons();
+     $this->view->form = $form;
+
+
+
+        if ($this->_request->isPost()) {
+
+            $formData = $this->_request->getPost();
+
+            if ($form->isValid($formData)) {
+
+                
+
+                $uploadedData = $form->getValues();
+                
+
+              echo "Coupon Uploaded!";
+            
+
+            } else {
+
+                $form->populate($formData);
+
+            }
+        }
+
+        $this->view->form = $form;
+    }
+
+
+     public function deleteAction()
+     {
+        $shopcustomhours = new Application_Model_Shopcustomhours(); 
+        $ID = $this->_request->getParam('ID');
+        $where = "ID = '$ID'";
+        $shopcustomhours->delete($where);
+        $this->_redirect('manage/shop-hours');
+
+
+     }
+
+     public function deleteServiceAction()
+     {
+
+     }
+
+   }

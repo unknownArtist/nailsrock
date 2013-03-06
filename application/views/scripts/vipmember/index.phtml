@@ -1,0 +1,51 @@
+ 
+
+
+ </div>
+
+<div id="wrapper">
+<div id ="appointments">
+
+
+
+<h1 style="float: left; color: #408080;">VIP Member Login</h1>
+<?php echo $this->AdminSignIn; ?>
+
+<?php if(isset($this->SignUpError)) 
+{
+    echo $this->SignUpError; 
+}
+?>
+
+<br />
+<a id="foregtpass-bt"  style="margin-left: 400px;" href="<?php  echo $this->baseUrl(); ?>/vipmember/forgetpass">Forget Your Password</a>
+<p style="margin-left: 170px;">Don't have a login? Click here to create a  <a href="<?php  echo $this->baseUrl(); ?>/user/signup">
+
+  <button>New Members Sign Up Here</button></a></p>
+
+
+
+<div id="forgetpass-dlg" style="display: none;">
+<form action="" method="GET">
+
+<h1>Enter your Email:</h1>
+
+<input type="text" name="email" id="" class="" value="" />
+<input type="submit" name="submit" value="" class="" id="" />
+
+</form>
+
+
+</div>
+<script type="text/javascript">
+<!--
+	    	jQuery( '#forgetpass-bt' ).click(function (){
+
+                    jQuery( '#forgetpass-dlg' ).dialog();
+        });
+-->
+</script>
+</div>
+</div>
+
+

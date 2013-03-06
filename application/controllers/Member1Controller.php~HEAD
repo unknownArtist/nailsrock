@@ -1,0 +1,202 @@
+<?php 
+class MemberController extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+        /* Initialize action controller here */
+    }
+
+    public function indexAction()
+    {
+    	$form = new Application_Form_Account();
+        $this->view->form = $form;
+
+
+      if ($this->getRequest()->isPost() && $this->view->form->isValid($this->_getAllParams()))
+        {
+          
+              $members = new Application_Model_Members();
+
+               $u_data = array(
+
+                                'mem_card'    =>    $form->getValue('mem_card'),
+                                'email'       =>    $form->getValue('email'),
+                                'password'    =>    $form->getValue('password'),
+                                'firstName'   =>    $form->getValue('firstName'),
+                                'lastName'    =>    $form->getValue('lastName'),
+                                'phone'       =>    $form->getValue('phone'),
+                                'address'     =>    $form->getValue('address'),
+                                'city'        =>    $form->getValue('city'),
+                                'state'       =>    $form->getValue('state'),
+                                'zip_code'    =>    $form->getValue('zip_code'),
+                                'vipMember'   =>    $form->getValue('VipMember'),
+                            ); 
+
+              
+                $members->insert($u_data);
+                $form->reset();
+
+    }
+}
+
+    public function accountsAction()
+    {
+
+        $tmp1 = new Application_Model_Members();
+        //$where = "userID = $userData->userID";
+        $accounts = $tmp1->fetchAll()->toArray();
+        $this->view->accountsData = $accounts;
+    }
+
+    public function viewAccountAction()
+    {
+        $where = "memberID = ".$this->_request->getParam('memberID');
+
+        $tmp1 = new Application_Model_Members();        
+        $accounts = $tmp1->fetchAll($where)->toArray();
+        $this->view->userdata = $accounts;
+
+
+        $tmp2 = new Application_Model_Viprewardshistory();
+        $vipAccountHistory = $tmp2->fetchAll($where)->toArray();
+        $this->view->vipAccountHistory = $vipAccountHistory;
+
+        $tmp3 = new Application_Model_Memberaccountnotes();
+        $notes = $tmp3->fetchAll($where)->toArray();
+        $this->view->notes = $notes;
+        // print_r($vipAccountHistory);
+        // die();
+
+            
+        $form1 = new Application_Form_viprewardhistory();
+        $this->view->form1 = $form1;
+
+        $form2 = new Application_Form_Notes();
+        $this->view->form2 = $form2;
+
+
+
+
+    }
+
+    public function editAccountAction()
+    {
+        $members = new Application_Model_Members();
+        $form = new Application_Form_Account();
+        $this->view->form = $form;
+
+         if ($this->getRequest()->isPost() && $this->view->form->isValid($this->_getAllParams()))
+        {
+          
+              
+
+               $u_data = array(
+
+                                'VipMember'    =>    $form->getValue('VipMember'),
+                                'email'       =>    $form->getValue('email'),
+                                'password'    =>    sha1($form->getValue('password')),
+                                'firstName'   =>    $form->getValue('firstName'),
+                                'lastName'    =>    $form->getValue('lastName'),
+                                'phone'       =>    $form->getValue('phone'),
+                                'address'     =>    $form->getValue('address'),
+                                'city'        =>    $form->getValue('city'),
+                                'state'       =>    $form->getValue('state'),
+                                'zip_code'    =>    $form->getValue('zip_code')
+                            ); 
+                $members->insert($u_data);
+                $form->reset();
+
+    
+        }else
+        {
+          $where = "memberID  = ".$this->_request->getParam('id');
+          $form->populate($members->fetchRow($where)->toArray());   
+        }
+    }
+
+
+        public function addRewardhistoryAction()
+        {
+          //   $tmp1 = new Application_Model_Viprewardshistory();
+          //   $where = "memberID = ".$this->_request->getParam('memberID');
+          //   $accounts = $tmp1->fetchAll($where)->toArray();
+            
+          //   $this->view->userdata = $accounts;
+
+          //   echo $this->_request->getPara('memberID'); 
+          //   $form1 = new Application_Form_viprewardhistory();
+          //   $this->view->form1 = $form1;
+
+
+          // if ($this->getRequest()->isPost() && $this->view->form1->isValid($this->_getAllParams()))
+          //   {
+              
+          //         $members = new Application_Model_Viprewardshistory();
+
+          //          $u_data = array(
+
+          //                           'memberID'    =>    $form1->getValue('mem_card'),
+          //                           'date'       =>    now(),
+          //                           'rewardPoints'    =>    sha1($form1->getValue('rewardAmmount'))
+
+          //                       ); 
+          //           $members->insert($u_data);
+          //           $form1->reset();
+
+          //   }
+        }
+
+
+    public function addNotesAction()
+    {
+        $form2 = new Application_Form_Notes();
+        $this->view->form2 = $form2;
+
+
+
+            //       if ($this->getRequest()->isPost() && $this->view->form2->isValid($this->_getAllParams()))
+            // {
+               
+            //       $members = new Application_Model_Memberaccountnotes();
+
+            //        $u_data = array(
+
+            //                         'memberID'   =>    $form2->getValue('mem_card'),
+            //                         'date'       =>    $date,
+            //                         'notes'      =>    sha1($form2->getValue('Notes')),
+
+            //                     ); 
+            //         $members->insert($u_data);
+            //         $form2->reset();
+
+
+                    // $notes = new Application_Model_Memberaccountnotes();
+                    // $n_data = $notes->fetchAll($where = null,'id DESC','10,0');
+                    // $this->view->n_data = $n_data; 
+
+                  // $this->_redirect("member/view-account");
+
+
+
+         //  }
+
+    }
+
+    public function deleteMemberAction()
+    {
+        $where = "memberID = ".$this->_request->getParam('memberID');
+
+        $account = new Application_Model_Members();
+        $account->delete($where);
+
+
+        $notes = new Application_Model_Memberaccountnotes();
+        $notes->delete($where);
+
+        $vipHistory = new Application_Model_Viprewardshistory();
+        $vipHistory->delete($where);
+
+    }
+}
+

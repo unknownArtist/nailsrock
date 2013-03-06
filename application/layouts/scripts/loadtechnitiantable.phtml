@@ -1,0 +1,909 @@
+
+
+<input type="hidden" name="" value="<?php  echo $this->current_time_id; ?>" id="current_time_id" class="" />
+<?php
+	  $AllTechnicalHoursfordate=$this->AllTechnicalHoursfordate;
+?>
+
+			<?php foreach($this->Technician as $data):
+            
+            $technicianArr[$data['technicianID']]=$data["Name"];
+
+                       endforeach;
+
+
+//die('DEBUG');
+
+
+$oldappointment=$current_appointment=  $this->current_appointment ;
+
+$current_appointment_id_for_edit=$current_appointment->id;
+
+if ($current_appointment->id){
+    
+//	    echo '<pre>';
+//        print_r(  $current_appointment  );
+//        echo '</pre>';
+//  
+//        die('DEBUG');
+
+ $appointment_id= $cuerrent_appointment_id=$current_appointment->id;
+
+$current_technicinaID =$current_appointment->reserved_hours->technicianID;
+
+
+$current_time_id =$current_appointment->reserved_hours->time_id;
+$current_height=($current_appointment->duration)+5;
+
+$current_heightpx=$current_height."px";
+
+  if ($oldappointment->tech_requested){
+    $tech_requested_class="blue";
+}else {
+    $tech_requested_class="gray";
+}
+ $from=$oldappointment->reserved_hours->interval_time;
+ 
+   $time=strtotime($from);
+   
+    $minutes=$oldappointment->duration;
+    
+    $width=$minutes;
+    $widthpx=$width."px";
+    
+    $to=  date("h:i A", strtotime("+$minutes minutes", $time));;
+        
+     $firstName=$oldappointment->firstName;
+     
+     $serviceName=$oldappointment->serviceName;
+     
+     $serviceID=$oldappointment->serviceID;
+     $date=$oldappointment->Date;
+         
+      $technicianName=$oldappointment->interval_time;
+        $technicianName=$oldappointment->reserved_hours->Name;
+     
+     $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
+
+     ?>
+
+  <div title="current_<?php  echo $current_technicinaID."_".$current_time_id ; ?>" 
+  style=" opacity:.3; height: <?php  echo $current_heightpx; unset($current_heightpx) ?>; width: 80px; background-color: aqua; text-align: center;" 
+  class="current_drag" id="current_<?php   echo $current_technicinaID."_".$current_time_id ; ?>"> 
+
+<input type="hidden" style="height: 18px;" title="<?php  echo $title; ?>" class="appointment_bt <?php  echo $tech_requested_class; ?> "
+              
+               value="<?php  echo $appointment_id; ?>"/> 
+  
+ <label>  <?php     echo $firstName;  ?></label>  
+
+   </div>
+       
+       
+<?php
+}  ?>
+
+<div id="cardSlots">
+
+<span id="times">
+
+<ul>
+
+  <?php  
+         
+  
+           $rows=  $AllTechnicalHoursfordate;
+           
+           
+//       
+//	    echo '<pre>';
+//        print_r(  $rows   );
+//        echo '</pre>';
+//        
+//        die('DEBUG');
+         if (is_array($rows)) {
+            
+            $j=0;
+	       foreach ($rows as $row) {
+	           
+
+                               if ( $j%12==0  ){
+                                
+                                
+                     ?>  
+                     
+                     <li style="technician-name-li" >
+                     
+                     <span> 
+                     
+                     <?php  echo $technicianArr[$technicinaID]; ?> </span>
+                      </li>
+    
+                    
+                      <?php
+                    
+                  
+                } 
+                $j++;
+                
+
+                
+                     if ( $this->current_time_id > $row->id  ){
+            
+            $remove="remove";
+           // echo $remove;
+        }       
+           
+               
+	            ?>  <li  class="<?php  echo $remove; unset($remove) ?>">   <?php  
+                
+                
+                $a=substr($row->interval_time,0,strlen($row->interval_time)-2);
+                $b=substr($row->interval_time,strlen($a),3);
+                
+                echo $a." ".$b ; 
+                
+                
+                
+                
+                ?></li>  <?php
+           }
+         }
+    ?>
+
+</ul>
+
+
+</span>
+<span id="times-slots">
+
+  <?php  
+           $rows=  $this->TechniciansAvailable;
+         if (is_array($rows)) {
+            
+	       foreach ($rows as $technicinaID=>$timedatas) {
+	            ?>    <ul> <?php
+                $i=0;
+                $slots=0;
+               foreach ( $timedatas as $interval_time=>$timedata   ) {
+               // after 12 div there will be name of the technician
+            //  echo  $i%12;
+               
+                       if ( $this->current_time_id > $timedata['time_id']  ){
+            
+                       $remove="remove";
+        }     
+        
+        
+        
+        if ( $slots==12||$slots==0 ){
+//                    
+
+                     ?>  
+                     
+                     <li class="technician-name-li <?php  echo $remove; ?>" style="margin-top: 2px;">
+                     
+                     <?php  echo $technicianArr[$technicinaID]; ?> 
+                      </li>
+                      
+
+    
+                    
+                      <?php
+                    $slots=0;
+                  
+                } 
+                
+                if ($timedata['status']=='booked'){
+                         
+if ($this->appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerrent_appointment_id==$timedata['appointment']['appointment_id']):
+                  $heightpx="20px";
+                
+                else:
+                    
+                $duration=(int) $timedata['appointment']['duration'];
+   
+                $no_of_slots=$duration/15;
+            
+            
+            if ($no_of_slots>1) {
+                
+              $offsetarray=array(2=>2,3=>4,4=>5,5=>7,6=>9,7=>10);
+              $offset=$offsetarray[$no_of_slots];
+                $height=$timedata['appointment']['duration']+($no_of_slots*5)+$offset;
+                    
+                      
+                      $slots=$slots+$no_of_slots-1;
+                      
+                      if ($slots==12||$slots>12) 
+                      
+                      {
+                        
+                      //  echo $slots;
+                        $inside=true;
+                        $slots=$slots-12;
+                        $height=$height+22;
+                      }
+                      
+                        $heightpx=$height."px";
+                  
+                 
+            } else {
+                 $heightpx="20px";
+            }
+            
+            endif;
+        
+                } else {
+                     $heightpx="20px";
+                }
+        
+        // adding up remove class to be used in autoscroll 
+        
+
+  ?>  <li class="li-border "> 
+              
+              <?php
+	$own=null;
+    
+     $status= $timedata['status'];
+    
+                    if ( My_Auth::getInstance()->isVIPMember() ){
+
+                                     $vipMemberId=My_Auth::getInstance()->getLoggedUser('memberID');
+                
+
+if (  $timedata['status']=="booked"){
+    
+   $row_memberID= $timedata['data'][$technicinaID]['member']['memberID'];
+       
+       if ( $row_memberID!=$vipMemberId ){
+        
+          $own='disabled="1"';
+          
+        $status="not_own";
+       }
+       
+           
+} else {
+        
+        $same_day=false;
+$past_day=false;
+
+ $date=$this->date;
+ $today= $now = date('Y-m-d', time());
+ 
+ //	echo $today." ".$date ;
+//    die ('DEBUG');
+   if ( ($date==$today)) {
+    
+    $same_day=true;
+    
+    if ( My_Auth::getInstance()->isVIPMember() ) {
+        
+        
+        
+        $status="same_day";
+     
+    }
+    
+    if ( strtotime($today)>strtotime($date) ) {
+        $past_day=true;
+    }
+    
+  }
+       }
+
+
+
+
+
+                	} 
+                    
+        
+                
+         
+         if ($timedata['status']=="booked" ) {
+           // create title
+           
+           
+           $tech_member=$timedata['data'];
+ $oldappointment=(object)$timedata['appointment'];
+
+ 
+ 
+ if ($oldappointment->tech_requested){
+    $tech_requested_class="blue";
+}else {
+    $tech_requested_class="gray";
+}
+ 
+ $from=$oldappointment->interval_time;
+ 
+   $time=strtotime($from);
+   
+    $minutes=$oldappointment->duration;
+    $width=$minutes;
+    $widthpx=$width."px";
+    
+    $to=  date("h:i A", strtotime("+$minutes minutes", $time));;
+        
+     $firstName=$tech_member[$technicinaID]['member']['firstName'];
+     
+     $serviceName=$oldappointment->serviceName;
+     
+     $serviceID=$oldappointment->serviceID;
+     
+     $date=$oldappointment->Date;
+         
+      $technicianName=$tech_member[$technicinaID]['tech_requested']['Name']; 
+      
+     $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
+
+        $appointment_id=$oldappointment->appointment_id;
+         }           
+                    
+?>
+              
+  <div 
+
+  
+  title="<?php  echo $title ; ?>" 
+  style="height: <?php  echo $heightpx; unset($heightpx) ?>; width: 80px;" 
+  class="<?php  echo $tech_requested_class." ".$status." ".$remove;
+    unset($remove); echo " ".$technicinaID."_".$timedata['time_id']; ?>" 
+    id="<?php  echo $technicinaID."_".$timedata['time_id'] ; ?>">
+  
+  
+  
+
+  <?php   
+  
+  unset($status);
+  
+    switch ($timedata['status']){
+        case 'available':
+        if ((!$same_day &&!$past_day )):
+         ?>   
+          	 <input type="checkbox" name="technitian_<?php echo $timedata['time_id']."_".$technicinaID; ?>" value="<?php echo $technicinaID; ?>" />
+           
+           <?php
+           
+           if ($past_day&&My_Auth::getInstance()->isVIPMember() ) {
+             ?>  
+             
+             <script type="text/javascript">
+<!--
+	     
+     jQuery('.available').click(function (){
+        
+        alert("Sorry: Same Appointment Edit is not Possible");
+});
+-->
+</script>
+                <?php
+           }
+           
+          endif;          
+          break;
+          
+          
+          case 'booked':
+           ?>  
+           
+           
+           
+<?php 
+
+$tech_member=$timedata['data'];
+ $oldappointment=(object)$timedata['appointment'];
+
+ 
+ 
+ if ($oldappointment->tech_requested){
+    $tech_requested_class="blue";
+}else {
+    $tech_requested_class="gray";
+}
+ 
+ $from=$oldappointment->interval_time;
+ 
+   $time=strtotime($from);
+   
+    $minutes=$oldappointment->duration;
+    $width=$minutes;
+    $widthpx=$width."px";
+    
+    $to=  date("h:i A", strtotime("+$minutes minutes", $time));;
+        
+     $firstName=$tech_member[$technicinaID]['member']['firstName'];
+     
+     $serviceName=$oldappointment->serviceName;
+     
+     $serviceID=$oldappointment->serviceID;
+     
+     $date=$oldappointment->Date;
+         
+      $technicianName=$tech_member[$technicinaID]['tech_requested']['Name']; 
+      
+     $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
+
+        $appointment_id=$oldappointment->appointment_id;
+        
+    ?>
+           
+              <input type="hidden" style="height: 19px;" title="<?php  echo $title; ?>" class="appointment_bt  "
+              
+               value="<?php  echo $appointment_id; ?>"/> 
+  
+  <label style="padding:0 10px;" class="<?php  echo $tech_requested_class; ?>">
+   <?php     echo $tech_member[$technicinaID]['member']['firstName'];  ?> 
+  
+  
+  </label>
+  <input type="hidden" name="" class="serviceID" value="<?php  echo $serviceID; ?>" id="" class="" />
+    <input type="hidden" name="" class="date" value="<?php  echo $date; ?>" id="" class="" />
+       <?php
+       
+
+       
+          break;
+    }
+  
+
+  
+  $timedata['status'];
+  
+  
+   ?>
+  
+  <input type="hidden" name="" value="<?php  echo $technicinaID."_".$timedata['time_id'] ; ?>" 
+  id="" class="technician_class" />
+  
+  
+  
+   </div>  </li>  <?php 
+   
+   /**
+    
+                       <li class="li-border "> 
+              
+  <div title="107_49" style="height: 20px; width: 80px;" class="blue available  107_49 ui-droppable" id="107_49">   
+         
+          	 <input name="technitian_49_107" value="107" type="checkbox">
+             
+  <input name="" value="107_49" id="" class="technician_class" type="hidden">
+  
+  
+  
+   </div>  </li>
+    
+    */
+          $appoint_id_edit=$this->appoint_id_edit;
+       
+              
+                $duration=(int) $timedata['appointment']['duration'];
+                $no_of_available=($duration/15)-1;
+       
+       
+       if ( !$timedata['no_edit'] ):     
+           
+       if ( $appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerrent_appointment_id==$timedata['appointment']['appointment_id']  ) 
+       
+       
+       {
+        
+        $new_time_id=$timedata['time_id']+1;;
+        
+        for ($j=0;$j<$no_of_available;$j++) {
+            
+            
+            $slots++;
+            
+            
+                         if ( $slots==12||$slots==0 ){
+//                    
+
+                     ?>  
+                     
+                     <li class="technician-name-li <?php  echo $remove; ?>" style="margin-top: 2px;">
+                     
+                     <?php  echo $technicianArr[$technicinaID]; ?> 
+                      </li>
+    
+                    
+                      <?php
+              
+                    $slots=0;
+                  
+                } 
+    
+    
+    
+            $new_time_id+=$j;
+            
+	 ?> 
+      <li class="li-border "> 
+              
+              
+  <div title="<?php  echo $technicinaID."_".$new_time_id ; ?>" 
+  style="height: 20px; width: 80px;" 
+  class="available ui-droppable <?php  " ".$timedata['status']." ".$remove;  unset($remove); echo " ".$technicinaID."_".$new_time_id; ?>" id="<?php  echo $technicinaID."_".$new_time_id ; ?>">
+  
+     
+     
+          	 <input type="checkbox" name="technitian_<?php echo $new_time_id."_".$technicinaID; ?>" value="<?php echo $technicinaID; ?>" />
+         
+     </div> 
+     </li>
+      <?php
+        }
+        
+       } 
+       
+       endif;
+            
+            
+            
+               
+            $i++;
+               
+               $slots++;
+               
+               
+                 
+             }  
+             
+             
+            
+                 ?>  </ul>   <?php
+           }
+         }
+    ?>
+
+</span>
+</div>
+
+  <div id="appointment-details" style="display: none;">
+
+<form action="#" onsubmit="return false" method="post" enctype="application/x-www-form-urlencoded">
+
+<h1>Appointment Details</h1>
+
+
+<div id="appointment-details-div">
+
+</div>
+</form>
+
+</div>
+   
+
+     <script type="text/javascript">
+     
+     jQuery('.same_day').click(function (){
+        
+        alert("Sorry: Same Day Appointment placing/Editing is not Possible");
+});
+
+     jQuery('.not_own').click(function (){
+        
+        alert("Sorry: This is not Your Appointment");
+});
+
+
+     
+    	jQuery( '.booked' ).click(function (){
+            
+        
+        
+        
+     //   alert( jQuery('input:radio[name="drag-srop"]:checked').val()=="1" );
+           
+           var is_drop_down_active=jQuery('input:radio[name="drag-srop"]:checked').val()=="1"; 
+           
+         //  alert(is_drop_down_active);          
+            
+            if (!is_drop_down_active){
+             
+             // show appointment delete dialog
+             
+        //     alert($(this+" .appointment_bt").val());
+                       
+                       
+          var id=$(this).find('.appointment_bt').val();
+          	   
+var token=Math.random();
+
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadappointment/id/'+id+"/token/"+token,
+  success: function(data) {
+  
+   
+   
+   jQuery('#appointment-details-div').html(data);
+   
+   jQuery( '#appointment-details' ).dialog({title:'Nailsrock',width:400,height:250});
+   
+     }
+  
+ 
+});
+             
+          //   http://admin.nailsrock.biz/appointments/loadappointment/id/800
+             
+             
+             
+                return;
+            } 
+            
+            
+                
+    var ajax_on= jQuery('#ajax_on').val();
+    
+     var current_appointment= jQuery( '#appointment_editing_on' ).val(); 
+    
+ // alert(  ajax_on+" drop "+current_appointment    );
+    if ( ajax_on|| current_appointment ) {
+      //  alert("ok");
+        return;
+    }
+        
+    	   
+         var serviceID=  jQuery( this ).find('.serviceID').val();
+          	   
+         var date=  jQuery( this ).find('.date').val();
+         
+
+                  jQuery( '#serviceID' ).val(serviceID);
+
+             jQuery( '# date' ).val( date);
+           
+           
+      //   current_appointment_id
+         var slotID=jQuery( this ).attr('id'); 
+         
+              var currentId= jQuery('#current_appointment_id').val();
+              
+              
+              if (slotID!=currentId) {
+                        // current_appointment_id
+           jQuery( '#current_appointment_id' ).val( slotID);   
+           
+           
+      
+            loadAppointments();
+            
+               jQuery( '#appointment_editing_on' ).val('1');   
+          
+         
+                
+              } else {
+                 jQuery( '#'+currentId ).css('opacity','100');  
+                 jQuery( '#current_appointment_id' ).val(''); 
+                 
+              jQuery( '#appointment_editing_on' ).val('');   
+          
+              }
+   
+                
+        });
+
+
+
+jQuery('input:radio[name="drag-srop"]').change(function (){
+
+
+   
+           var is_drop_down_active=jQuery('input:radio[name="drag-srop"]:checked').val()=="1"; 
+         
+               if (!is_drop_down_active){
+               
+                   jQuery( '#current_appointment_id' ).val(''); 
+                   loadAppointments();
+               
+               
+                return;
+            } 
+
+});
+
+jQuery('#appointment-slider').change(function (){
+
+
+        var current_time_id=jQuery('#current_time_id').val();
+        
+   //  alert( current_time_id  );
+
+
+               if (jQuery('#appointment-slider:checked').val()){
+              
+                jQuery('.remove').show();
+              
+                return;
+                
+            } else {
+                
+             
+             jQuery('.remove').hide();
+             
+                  return;
+                
+            }
+
+});
+
+
+//
+//     jQuery('.appointment_bt' ).click(function (){
+//          
+//          
+//                      if (jQuery('#drag-srop:checked').val()){
+//               
+//               
+//               
+//               
+//                return;
+//            } 
+//        
+//          
+//          var id=jQuery(this).val();
+//          	   
+//var token=Math.random();
+//
+//          jQuery.ajax({
+//  url: <?php echo $this->baseUrl() ?>'/appointments/loadappointment/id/'+id+"/token/"+token,
+//  success: function(data) {
+//  
+//   
+//   
+//   jQuery('#appointment-details-div').html(data);
+//   
+//   jQuery( '#appointment-details' ).dialog({title:'Nailsrock',width:400,height:250});
+//   
+//     }
+//  
+// 
+//});
+//     
+//});
+//     
+    $('.available').droppable( {
+      accept: '.current_drag, .booked',
+      hoverClass: 'hovered',
+      drop: handleCardDrop
+    } );
+  
+
+
+function handleCardDrop( event, ui ) {
+
+var draggable=ui.draggable;
+
+var technician_timeId= jQuery(this).attr('id');
+ var technicain_timidarr=technician_timeId.split('_');
+ 
+ var technician=technicain_timidarr[0];
+ 
+
+ var time_id=parseInt(technicain_timidarr[1]);
+ var no_slots=parseInt(jQuery('#'+jQuery('#serviceID').val()).val())/15;
+ 
+//alert(technician+" "+time_id+" "+no_slots  );
+
+var current_appointment_id=  jQuery(draggable).find('.appointment_bt').val();
+//alert( current_appointment_id );
+
+var required_slots=0;
+
+ for (var i=0;i<no_slots;i++) {
+	
+    var new_time_id=time_id+i;
+    
+    var selector="."+technician+"_"+new_time_id;
+
+  //    alert(selector);
+    
+    if (jQuery(selector ).hasClass('available') ){
+      
+    
+         required_slots++;
+    }
+       
+        
+       var same_appointment_id= jQuery(selector+" .appointment_bt").val();
+       
+       
+       if ( same_appointment_id==current_appointment_id  ){
+                required_slots=no_slots;
+                break;
+            }
+       
+  
+}
+
+if (required_slots==no_slots){
+   
+   var confirm_flag=true;
+   
+   if ( confirm_flag ){
+    // now send request to server to change the appointment ( service, technician, time slot, date  )
+     
+     
+     // new_technicianID  new_time_id  
+     
+     jQuery( '#new_time_id' ).val(time_id);
+    
+    
+    jQuery( '#new_technicianID' ).val(technician);
+        
+        jQuery( '#current_appointment_id' ).val(current_appointment_id);
+        
+        
+    //date=2012-10-15&firstName=Pascal&memberID=Pascal+Ledesma&lastName=Ledesma&phCode=(954)&phone=5566&serviceID=2&current_appointment_id=8&new_time_id=46&new_technicianID=4    
+    var data=  jQuery('form').eq(0).serialize();
+    
+//    alert( data);
+    
+        ui.draggable.draggable( 'disable' );
+    $(this).droppable( 'disable' );
+    ui.draggable.draggable( 'option', 'revert', false );
+    
+            jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/save-appointment',
+  data:data, 
+    type: "POST",
+  success: function(data) {
+    //jQuery('.result').html(data);
+ //  alert(data);
+ 
+ var new_tech_timeid=technician+"_"+new_time_id;
+        jQuery( '#current_appointment_id' ).val( new_tech_timeid);
+        
+        
+        jQuery('#'+technician_timeId ).css( 'opacity','100');
+        
+        jQuery( '#'+new_tech_timeid ).css( 'opacity','.30');
+        
+     //   alert(  new_tech_timeid);
+     
+          jQuery( '#appointment_editing_on' ).val('');   
+  
+ loadAppointments();
+     
+
+  }
+
+
+});
+  
+            return;
+   
+   
+   }
+    
+    
+} else {
+    
+    alert("Reschedule is not possible");
+}
+ 
+jQuery('#dump').html(jQuery(this).attr('title'));
+
+var flag=false;
+
+  if ( flag ) {
+    ui.draggable.addClass( 'correct' );
+    ui.draggable.draggable( 'disable' );
+    $(this).droppable( 'disable' );
+    ui.draggable.position( { of: $(this), my: 'left top', at: 'left top' } );
+    ui.draggable.draggable( 'option', 'revert', false );
+    correctCards++;
+  } 
+
+}
+
+</script>
+
+
+

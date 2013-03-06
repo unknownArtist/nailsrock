@@ -1,0 +1,167 @@
+<style type="text/css">
+<!--
+	.apointment_colors div, .apointment_colors label{
+	   float: left;
+	}
+-->
+</style>
+
+<div id="wrapper">
+<div id ="appointments">
+
+<table>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px; background-color: #77BA1C; border: 1px #837066 solid;">
+                </div>
+            </td>
+            <td class="content">
+                = Available
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px; background-color: #ededd6; border: 1px #837066 solid;">
+                </div>
+            </td>
+            <td class="content">
+                = Booked
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="height: 20px; width: 20px; background-color: #cccccc; border: 1px #837066 solid;">
+                </div>
+            </td>
+            <td class="content">
+                = No Service
+            </td>
+        </tr>
+    </table>
+
+<br />
+<h1>Appointments Page </h1>
+     <form onsubmit="return true;" method="post" action="" id="appointment-form">
+     
+     
+    <?php echo $this->form->memberID->render(); ?>
+	<?php echo $this->form->firstName->render(); ?>
+
+	<?php echo $this->form->lastName->render(); ?>
+	<?php echo $this->form->phCode->render(); ?>
+	<?php echo $this->form->phone->render(); ?>
+
+    <?php echo $this->form->serviceID->render(); ?>
+    
+    
+    <?php echo $this->form->date->render(); ?>
+	<div style=" clear:both;"></div>
+
+<table>
+<thead>
+<th> </th>
+			<?php foreach($this->Technician as $data):?>
+                
+					<th >
+						<?php echo $data["Name"]; ?>
+					</th>		
+					<?php endforeach;
+				?>
+</thead>
+
+<tbody>
+
+<?php
+	foreach ( $this->TechniciansAvailable as $interval=>$tech_member ) {
+	?>
+    <tr>  
+    <td style="width: 100px; font: 1em;"> <label><?php echo $interval; ?></label> </td>
+    	<?php foreach($this->Technician as $data):
+        
+            if ( array_key_exists( $data['technicianID'], $tech_member )  ):
+    
+     ?>   <button class="apointment_bt"><?php  echo $tech_member[$data['technicianID']]['member']['firstName']; ?></button>  <?php
+    else: 
+         ?>
+                
+					<td style="width: 100px;">
+					<input type="radio" name="technitian_<?php echo $id; ?>" value="<?php echo $data['technicianID']; ?>" />
+
+					</td>		
+					<?php
+                    endif;
+                    endforeach; 
+				?>
+
+     </tr>
+    <?php
+}
+?>
+</tbody>
+</table>
+<br />
+<br />
+<br />
+<input type="submit" value="Book Appointment" id="submit" />
+<br />
+</form>
+
+
+</div>
+</div>
+
+          
+<script type="text/javascript">
+
+	jQuery( ".date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    
+    	jQuery( '#memberID' ).change(function (){
+    	   
+    	 
+        var id=jQuery(this).val();
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/loadcustomer/format/json/id/'+id,
+  success: function(data) {
+    //jQuery('.result').html(data);
+    //alert(data.email);
+    jQuery('#firstName').val(data.firstName );
+      jQuery('#lastName').val(data.lastName );
+        jQuery('#email').val(data.email );
+          jQuery('#phone').val(data.phone );
+    
+  }
+});
+
+        });
+        
+       	jQuery( '#submit' ).click(function (){
+    	   
+
+          jQuery.ajax({
+  url: <?php echo $this->baseUrl() ?>'/appointments/makeappointment',
+  data:jQuery('#appointment-form').serialize(), 
+    type: "POST",
+  success: function(data) {
+    //jQuery('.result').html(data);
+   
+   if ( data.status==1 ) {
+    alert("Success");
+   } else {
+       alert("failure");
+   }
+
+
+    
+  }
+});
+
+        });     
+        
+           
+        
+</script>
+
+
+
+
+

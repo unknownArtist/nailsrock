@@ -1,0 +1,39 @@
+
+.form1 {
+    
+}
+.form1 dt{
+    float: left;
+    clear: left;
+    margin: 5px;
+
+}
+
+.form1 dd, .form1 dd select{
+      float: left;
+      clear: right;
+      margin: 5px;
+    
+}
+.form1 dd select{ 
+    width: 100px;
+    display: block;
+    
+  
+}
+.form1 dd .errors * {
+
+float: left;
+clear: left;
+      
+}
+.form1 .submit {
+    float: left;
+    clear: left;
+    margin-left: 100px;
+}
+
+.form1 .reset {
+        float: left;
+  
+}

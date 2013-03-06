@@ -1,0 +1,32 @@
+<div id="wrapper">
+   <div id="operataion">
+  	<h1>Operations</h1>
+
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+					   
+					   
+					   
+					     </div>
+  </div>
+  <div id="shophours">
+
+<h1>Shop Hours</h1>
+<h3>Custom Hours</h3>
+<?php
+echo $this->form;
+?>
+</div>
+</div>

@@ -1,0 +1,290 @@
+<div id="wrapper">
+   <div id="operataion">
+  	<h1>Operations</h1>
+             
+    
+<a id="addTech" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'employees')); ?>">
+                       Employees</a>
+
+<a id="techServices" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'services')); ?>">
+                       Shop Services</a>
+
+<a id="shopHourz" href="<?php echo $this->url(array(
+                       'controller' =>  'manage', 
+                       'action'  => 'shop-hours')); ?>">
+                       Shop Hours</a>
+
+					   
+					   </div>
+  <div id="employee">
+  	<h1>Add Technician</h1> 
+
+
+<form id="addTechnicians1" enctype="application/x-www-form-urlencoded" method="post" 
+
+
+action="<?php  echo $this->baseUrl(); ?>/manage/add-technician" onsubmit="return true"><dl class="zend_form">
+
+
+
+
+<dt id="name-label"><label for="name" class="required">Technician Name:</label></dt>
+<dd id="name-element">
+<input name="name" id="name" value="" type="text"/></dd>
+
+
+<label style="float: left; clear: both;">Days Avialable</label>
+
+<table id="addtechnitian-table">
+<tr>
+	<td>Sun</td>
+	<td>Mon</td>
+	<td>Tue</td>
+	<td>Wed</td>
+	<td>Thu</td>
+	<td>Fri</td>
+	<td>Sat</td>
+</tr>
+<tr>
+
+	<td>
+    
+<?php
+	echo $this->form->sunCloseAllDay->render();
+?>
+
+
+
+    </td>
+    <td>
+       
+<?php
+	echo $this->form->monCloseAllDay->render();
+?>
+
+    </td>
+	<td>
+ 
+<?php
+	echo $this->form->tueCloseAllDay->render();
+?>
+
+</td>
+	<td> 
+
+    
+<?php
+	echo $this->form->wedCloseAllDay->render();
+?>
+
+
+ </td>
+ <td>
+    
+<?php
+	echo $this->form->thusCloseAllDay->render();
+?>
+
+
+</td>
+	<td>
+    
+<?php
+	echo $this->form->friCloseAllDay->render();
+?>
+
+
+    </td>
+	<td>
+    
+    
+<?php
+	echo $this->form->satCloseAllDay->render();
+?>
+
+
+    </td>
+</tr>
+
+
+<tr>
+	<td>
+    <span>Start:</span> <br />
+      
+    
+<?php
+	echo $this->form->sunOpen->render();
+?>
+
+      <span>End:</span> <br />
+    
+<?php
+	echo $this->form->sunClose->render();
+?>
+
+
+  
+    </td>
+	<td>
+      <span>Start:</span> <br />
+  
+<?php
+	echo $this->form->monOpen->render();
+?>
+
+ 
+      <span>End:</span> <br />
+     
+<?php
+	echo $this->form->monClose->render();
+?>
+
+    </td>
+	<td>
+    
+    <span>Start:</span> <br />
+  
+
+  
+<?php
+	echo $this->form->tueOpen->render();
+?>
+
+    
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->tueClose->render();
+?>
+
+    </td>
+	<td>
+     
+
+<span>Start:</span> <br />
+ 
+  
+<?php
+	echo $this->form->wedOpen->render();
+?>
+
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->wedClose->render();
+?>
+
+    </td>
+	<td>
+
+
+
+
+
+  <span>Start:</span> <br />
+  
+  
+  
+<?php
+	echo $this->form->thusOpen->render();
+?>
+
+
+      <span>End:</span> <br />
+ 
+    
+<?php
+	echo $this->form->thusClose->render();
+
+?>
+    </td>
+	<td>
+      <span>Start:</span> <br />
+  
+  
+  
+<?php
+	echo $this->form->friOpen->render();
+?>
+
+ <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->friClose->render();
+?>
+
+     
+    </td>
+    
+	<td>
+      <span>Start:</span> <br />
+ 
+  
+<?php
+	echo $this->form->satOpen->render();
+?>
+
+      <span>End:</span> <br />
+  
+    
+<?php
+	echo $this->form->satClose->render();
+?>
+
+ 
+    </td>
+</tr>
+</table>
+
+
+
+
+
+<br />
+<dt></dt>
+<dd>
+
+<br />
+<label style="float: left; clear: both;">Services Offered</label> <br />
+<div style="float: ; clear: both;"></div>
+
+<ul style="list-style-type: none;">
+
+
+<?php foreach($this->Services as $t): ?>
+<li>  
+
+<input type="checkbox" name="service[]" value="<?php echo $t['serviceID'];?>" /> 
+
+
+
+<?php echo $t['serviceName']?>  </li>
+
+
+<?php  endforeach; ?>
+
+</ul>
+
+</dd>
+
+<dt id="AddTechnician-label1">&nbsp;</dt><dd id="AddTechnician-element">
+<input name="AddTechnician1" id="AddTechnician1" value="AddTechnician" type="submit"/></dd>
+
+
+</dl>
+
+</form>
+
+
+					     </div>
+				
+
+  </div>
+

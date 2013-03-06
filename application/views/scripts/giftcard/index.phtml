@@ -1,0 +1,148 @@
+<div id="wrapper">
+<div id ="contentarea" style="min-height:300px;">
+<h1> Gift Cards </h1>
+
+<style type="text/css">
+<!--
+	#gift-card-table td{
+	   
+       text-align: center;
+	}
+-->
+</style>
+<div>
+<?php
+ function USAToMySQLDate($usa_date){
+    
+	list($m,$d,$y)=explode('-',$usa_date);
+    
+    
+    
+    
+        
+      return  $date="20".$y."-".$m."-".$d;
+}
+ function MySQLToUSADate($mysql_date){
+    
+	list($y,$m,$d,)=explode('-',$mysql_date);
+        
+      return  $date=$m.'-'.$d.'-'.substr($y,-2,2);
+}
+?>
+<a href="<?php echo $this->baseUrl() ?>giftcard/add-giftcard">Add Gift Card</a>
+<?php
+	$paginator=$this->paginator;
+
+if ( count($paginator) ) {
+?>
+<table class="sortable" id="gift-card-table">
+        <thead class="titlestrip">
+        <th style="width: 20px;" > <div class="titles" style="width: 20px;">ID</div> </th>
+        <th> <div class="titles" style="width: 100px;">Date  Created</div>   </th>
+       
+        <th style="width: 150px;"> <div class="titles"  style="width: 150px;">Card No</div> </th>
+        <th style="width: 70px;"> <div class="titles"  style="width: 70px;">Card Balance</div> </th>
+        
+        <th style="width: 70px;"> <div class="titles"  style="width: 70px;">Created By</div> </th>
+        
+       
+         <th style="width: 150px;"> <div class="titles">Note</div> </th>
+          <th style="width: 20px;" > <div class="titles" style="width: 20px;">Active</div> </th>
+       
+          <th>  <div class="titles">Operation</div> </th>
+     </thead>
+     
+     
+<tbody>
+
+<?php
+
+
+
+
+
+
+foreach ( $paginator as $row     ) {
+	   
+       
+	 ?>   
+    
+     <tr>
+     
+     <td>     <?php  echo $row->id; ?>           </td>
+     
+     <td>      <?php  echo  MySQLToUSADate($row->date_created); ?>      </td>
+     
+     
+       <td>       <?php  echo $row->card_no; ?>    </td>
+       
+      <td>       $<?php  echo $row->points; ?>     </td>
+    
+    
+     <td>     <?php  echo $row->firstName; ?>         </td>
+     
+     
+
+      <td>     <?php  echo $row->note; ?>           </td>   
+           <td>     <?php 
+     
+     if ( $row->active ) {
+echo "YES";
+	} else {
+echo "NO";
+}
+
+     ?>         </td> 
+      
+      <td>
+      
+  
+      
+
+     <a href=" <?php  echo BASE_URL; ?>/giftcard/download/id/<?php  echo $row->id ; ?> ">  Download  </a>
+      
+     <!--
+     <a href="<?php  echo BASE_URL; ?>/giftcard/delete/id/<?php  echo $row->id ; ?>"> Delete  </a>
+    
+          <a href="<?php  echo BASE_URL; ?>/giftcard/invalid/id/<?php  echo $row->id ; ?>"> Invalid  </a>
+      
+      
+-->
+      
+          </td>
+  
+     
+     </tr>
+     
+       <?php
+    
+    }
+    
+    
+    
+    
+     ?>  
+ </tbody>
+ 
+ </table>
+ 
+  <?php  echo $this->paginationControl($this->Members, 'Sliding', 'pagination.phtml'); ?>
+  
+ 
+    <?php
+    
+	} else {
+ ?>  <h1>No Gift Card </h1>   <?php
+}
+
+	
+
+?>
+
+</div>
+
+
+</div>
+</div>
+
+

@@ -1,0 +1,132 @@
+<?php
+	$appointment=$this->appointment;
+    
+    function USAToMySQLDate($usa_date){
+    
+	list($m,$d,$y)=explode('-',$usa_date);
+        
+      return  $date="20".$y."-".$m."-".$d;
+}
+ function MySQLToUSADate($mysql_date){
+    
+	list($y,$m,$d,)=explode('-',$mysql_date);
+        
+      return  $date=$m.'-'.$d.'-'.substr($y,-2,2);
+}
+?>
+
+<form id="load-appointment-form" onsubmit="return true" method="post" enctype="application/x-www-form-urlencoded" 
+action="<?php  echo $this->baseUrl(); ?>/appointments/delete-appointment/id/<?php  echo $appointment->appointment_id; ?>">
+
+
+<table>
+<tr>
+	<td><label>Client Name:</label></td>
+	<td> <input type="hidden" name="appointment_id" value="<?php  echo $appointment->appointment_id; ?>" id="id" class="" />
+    
+    <label> <b><?php  echo $appointment->firstName; ?></b>  </label>
+    
+     </td>
+</tr>
+<tr>
+	<td><label>Client Phone:</label></td>
+	<td><label id="phone" ><b><?php  echo $appointment->phone; ?></b>  </label></td>
+</tr>
+<tr>
+	<td><label>Date:</label></td>
+	<td>
+    <?php  echo MySQLToUSADate($appointment->date); ?>
+<!--
+     <input class="datepicker" type="text" name="date_edit" id="date_edit"  value="<?php  echo $appointment->date; ?>" />
+-->
+     
+     
+      </td>
+</tr>
+<tr>
+	<td><label>Time:</label></td>
+	<td><b> 
+    <?php  echo $appointment->interval_time; ?>
+   </b>
+    
+    </td>
+</tr>
+<tr>
+	<td><label>Service:</label></td>
+	
+  	<td><b><?php  echo $appointment->serviceName; ?></b></td>
+    
+</tr>
+<tr>
+	<td><label>Technician</label></td>
+	<td><b><?php  echo $appointment->Name; ?></b></td>
+</tr>
+<tr>
+	<td>
+    
+   
+    </td>
+	<td>
+     <input type="hidden" name="duration" value="<?php  echo $appointment->duration; ?>" id="" class="" />
+      <input type="hidden" name="interval_time" value="<?php  echo $appointment->interval_time; ?>" id="" class="" />
+      <input type="hidden" name="time_id" value="<?php  echo $appointment->time_id; ?>" id="" class="" />
+     
+         <button class="delete-appointment" value="<?php  echo $appointment->appointment_id; ?>">Delete Appointment</button>
+   
+    </td>
+</tr>
+</table>
+</form>
+<script type="text/javascript">
+<!--
+//    $('.datepicker').datepicker({dateFormat:"yy-mm-dd"});
+//  
+//   $('.timepicker').timepicker({'step':15});
+//   
+//
+//   
+//   
+//    	jQuery( '.delete-appointment' ).click(function (){
+//    	   
+//   var id=jQuery( '#load-appointment-form #id').val();
+//   
+// //  alert(id);
+// 
+// var token=Math.random();
+// 
+//   
+//          jQuery.ajax({
+//  url: <?php echo $this->baseUrl() ?>'/appointments/delete-appointment/id/'+id+"/token/"+token,
+//  
+//  beforeSend:function (){
+// jQuery( '#appointment-details' ).dialog("destroy");
+//},
+//
+//  success: function(data) {
+//    //jQuery('.result').html(data);
+// //  alert(data);
+// 
+//  jQuery( '#appointment-details' ).dialog("close");
+// loadAppointments();
+//
+//    
+//  }
+//
+//
+//});
+//        });
+-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
