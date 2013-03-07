@@ -49,8 +49,6 @@
             <td class="content">
                 = Available
             </td>
-        </tr>
-        <tr>
             <td>
                 <div style="height: 20px; width: 20px; border: 1px #837066 solid;" class="booked">
                 </div>
@@ -58,21 +56,18 @@
             <td class="content">
                 = Booked
             </td>
-        </tr>
-        <tr>
-            <td>
+             <td>
                 <div style="height: 20px; width: 20px;  border: 1px #837066 solid;" class="no_service">
                 </div>
             </td>
             <td class="content">
                 = No Service
             </td>
-        </tr>
-        <tr>
-        <td colspan="2">
+            <td colspan="2">
         <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
         </td>
         </tr>
+        
     </table>
 </div>
 
@@ -212,9 +207,11 @@
           
             menuYloc = parseInt($(name).css("top").substring(0,$(name).css("top").indexOf("px")))
             $(window).scroll(function () {             
-                    $('#times-slots').css('float','left');            
+                    $('#times-slots').css('float','left'); 
+                    $(name).css('left',$('#times-slots').offset().left+'px'); 
+                    $(name).css('display','block');
                     offValue = menuYloc+$(document).scrollTop();                    
-                    offset = $('#times-slots').offset().top+$('#times-slots').height()-$('#floatMenu').height() +"px";                    
+                    offset = $('#times-slots').offset().top+$('#times-slots').height() +"px";
                     if(($('#times-slots').offset().top+$('#times-slots').height()) < offValue)
                          $(name).animate({top:offset},{duration:500,queue:false});
                 
