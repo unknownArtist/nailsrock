@@ -396,7 +396,6 @@ form {
     border: 1px solid black;
 }
 #appointment-table td {
-    /*padding: 5px;*/
     padding: 2px;
 }
 #appointment-table {
@@ -513,9 +512,11 @@ form {
     border: 1px solid black;
     left: 50%;
     /*margin-left: 360px;*/
-    margin-left: 315px; /*new chnage*/
+    /*margin-left: 169px; new chnage*/
     padding: 10px;
-    width: 160px;
+    width: 550px;
+    background: white;
+    display: none;
 }
 
 .content
@@ -530,7 +531,7 @@ form {
 .floatMenu {
     position: absolute;
     /*top: 285px;*/
-    top: 510px;
+    top: 452px;
 }
 .blue {
     background-color: #4FA7FF;
