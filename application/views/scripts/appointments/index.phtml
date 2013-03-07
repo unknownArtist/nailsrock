@@ -17,6 +17,13 @@
     text-align: center;
 }
 
+.content
+{
+	width:80px;
+	float:left;
+	margin:0px;
+}
+
 -->
 
 </style>
@@ -35,37 +42,33 @@
 <div id="floatMenu">
 <table>
         <tr>
-        <td colspan="2">
-<input type="submit" value="Book Appointment" id="submit" />
-<br />
-         </td>
-        </tr>
-
-        <tr>
+           <td >
+             <input type="submit" value="Book Appointment" id="submit" />
+            </td>
             <td>
-                <div style="height: 21px; width: 20px; border: 1px #837066 solid;" class="available">
+                <div style="height: 15px; width: 15px; border: 1px #837066 solid;" class="available">
                 </div>
             </td>
             <td class="content">
                 = Available
             </td>
             <td>
-                <div style="height: 20px; width: 20px; border: 1px #837066 solid;" class="booked">
+                <div style="height: 15px; width: 15px; border: 1px #837066 solid;" class="booked">
                 </div>
             </td>
             <td class="content">
                 = Booked
             </td>
              <td>
-                <div style="height: 20px; width: 20px;  border: 1px #837066 solid;" class="no_service">
+                <div style="height: 15px; width: 15px;  border: 1px #837066 solid;" class="no_service">
                 </div>
             </td>
-            <td class="content">
+            <td class="content" style="width: 88px;">
                 = No Service
             </td>
-            <td colspan="2">
-        <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
-        </td>
+            <td>
+             <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
+            </td>
         </tr>
         
     </table>
