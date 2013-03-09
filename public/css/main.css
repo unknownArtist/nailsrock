@@ -514,14 +514,14 @@ form {
     /*margin-left: 360px;*/
     /*margin-left: 169px; new chnage*/
     padding: 10px;
-    width: 550px;
+    width: 552px;
     background: white;
     display: none;
 }
 
 .content
 {
-	width:100px;
+	/*width:100px;*/
 	float:left;
 	margin:0px;
 }
@@ -536,6 +536,7 @@ form {
 .blue {
     background-color: #4FA7FF;
     color: black;
+    height: 20px;
 }
 .gray {
     background-color: gray;
