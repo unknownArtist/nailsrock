@@ -19,9 +19,11 @@
 
 .content
 {
-	width:80px;
+	/*width:80px;*/
+        font-size: 12px;
 	float:left;
 	margin:0px;
+        vertical-align: middle;
 }
 
 -->
@@ -46,28 +48,32 @@
              <input type="submit" value="Book Appointment" id="submit" />
             </td>
             <td>
-                <div style="height: 15px; width: 15px; border: 1px #837066 solid;" class="available">
+                <div style="height: 15px; width: 15px; border: 1px #837066 solid; margin-left: 5px;" class="available">
                 </div>
             </td>
             <td class="content">
                 = Available
             </td>
             <td>
-                <div style="height: 15px; width: 15px; border: 1px #837066 solid;" class="booked">
+                <div style="height: 15px; width: 15px; border: 1px #837066 solid;margin-left: 5px;" class="booked">
                 </div>
             </td>
             <td class="content">
                 = Booked
             </td>
              <td>
-                <div style="height: 15px; width: 15px;  border: 1px #837066 solid;" class="no_service">
+                <div style="height: 15px; width: 15px;  border: 1px #837066 solid;margin-left: 5px;" class="no_service">
                 </div>
             </td>
-            <td class="content" style="width: 88px;">
+            <td class="content" >
                 = No Service
             </td>
+           
             <td>
-             <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> Tech Requested?
+             <input type="checkbox" value="1" id="tech_requested" class="" name="tech_requested" /> 
+            </td>
+             <td class="content" >
+               Tech Requested?
             </td>
         </tr>
         
