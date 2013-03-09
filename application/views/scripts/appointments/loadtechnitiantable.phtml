@@ -181,7 +181,7 @@ $current_heightpx=$current_height."px";
 
                      ?>  
                      
-                     <li class="technician-name-li <?php  echo $remove; ?>" style="margin-top: 2px;">
+                     <li class="technician-name-li <?php  echo $remove; ?>" style="padding-top: 2px;">
                      
                      <?php  echo $technicianArr[$technicinaID]; ?> 
                       </li>
@@ -222,9 +222,8 @@ if ($this->appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerren
                       //  echo $slots;
                         $inside=true;
                         $slots=$slots-12;
-                        $height=$height+22;
+                        $height=$height+23;
                       }
-                      
                         $heightpx=$height."px";
                   
                  
@@ -506,7 +505,7 @@ $tech_member=$timedata['data'];
 
                      ?>  
                      
-                     <li class="technician-name-li <?php  echo $remove; ?>" style="margin-top: 2px;">
+                     <li class="technician-name-li <?php  echo $remove; ?>" style="padding-top: 2px;">
                      
                      <?php  echo $technicianArr[$technicinaID]; ?> 
                       </li>
@@ -526,7 +525,7 @@ $tech_member=$timedata['data'];
       <li class="li-border "> 
               
               
-  <div title="<?php  echo $technicinaID."_".$new_time_id ; ?>" 
+  <div title="saami" 
   style="height: 20px; width: 80px;" 
   class="available ui-droppable <?php  " ".$timedata['status']." ".$remove;  unset($remove); echo " ".$technicinaID."_".$new_time_id; ?>" id="<?php  echo $technicinaID."_".$new_time_id ; ?>">
   
