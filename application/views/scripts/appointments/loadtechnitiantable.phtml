@@ -209,7 +209,7 @@ if ($this->appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerren
             if ($no_of_slots>1) {
                 
               $offsetarray=array(2=>2,3=>4,4=>5,5=>7,6=>9,7=>10);
-              $offset=$offsetarray[$no_of_slots];
+              $offset=$offsetarray[$no_of_slots] - 1;
                 $height=$timedata['appointment']['duration']+($no_of_slots*5)+$offset;
                     
                       
@@ -222,8 +222,11 @@ if ($this->appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerren
                       //  echo $slots;
                         $inside=true;
                         $slots=$slots-12;
-                        $height=$height+23;
+                        $height=$height+22;
+                        
+                        
                       }
+                        $height = $height ;
                         $heightpx=$height."px";
                   
                  
