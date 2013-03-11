@@ -208,9 +208,10 @@ if ($this->appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerren
             
             if ($no_of_slots>1) {
                 
-              //$offsetarray=array(2=>2,3=>4,4=>5,5=>7,6=>9,7=>10);
-                $offsetarray=array(2=>2,3=>4,4=>5,5=>8,6=>10,7=>10);
-              $offset=$offsetarray[$no_of_slots] ;
+              $offsetarray=array(2=>2,3=>4,4=>5,5=>7,6=>9,7=>10);
+             
+             // $offset=$offsetarray[$no_of_slots] ;
+              $offset=$no_of_slots*2-2;//consider border
                 $height=$timedata['appointment']['duration']+($no_of_slots*5)+$offset;
                     
                       
