@@ -208,7 +208,8 @@ if ($this->appoint_id_edit==$timedata['appointment']['appointment_id']||$cuerren
             
             if ($no_of_slots>1) {
                 
-              $offsetarray=array(2=>2,3=>4,4=>5,5=>7,6=>9,7=>10);
+              //$offsetarray=array(2=>2,3=>4,4=>5,5=>7,6=>9,7=>10);
+                $offsetarray=array(2=>2,3=>4,4=>5,5=>8,6=>10,7=>10);
               $offset=$offsetarray[$no_of_slots] ;
                 $height=$timedata['appointment']['duration']+($no_of_slots*5)+$offset;
                     
@@ -528,7 +529,7 @@ $tech_member=$timedata['data'];
       <li class="li-border "> 
               
               
-  <div title="saami" 
+  <div title="<?php  echo $technicinaID."_".$new_time_id ; ?>" 
   style="height: 20px; width: 80px;" 
   class="available ui-droppable <?php  " ".$timedata['status']." ".$remove;  unset($remove); echo " ".$technicinaID."_".$new_time_id; ?>" id="<?php  echo $technicinaID."_".$new_time_id ; ?>">
   
