@@ -297,34 +297,22 @@ $past_day=false;
     
   }
        }
-
-
-
-
-
-                	} 
+        } 
                     
-        
-                
-         
+         $title = "";//need to set the title for div
          if ($timedata['status']=="booked" ) {
            // create title
-           
-           
            $tech_member=$timedata['data'];
- $oldappointment=(object)$timedata['appointment'];
-
+           $oldappointment=(object)$timedata['appointment'];
+             if ($oldappointment->tech_requested){
+                $tech_requested_class="blue";
+            }else {
+                $tech_requested_class="gray";
+            }
  
+    $from=$oldappointment->interval_time;
  
- if ($oldappointment->tech_requested){
-    $tech_requested_class="blue";
-}else {
-    $tech_requested_class="gray";
-}
- 
- $from=$oldappointment->interval_time;
- 
-   $time=strtotime($from);
+    $time=strtotime($from);
    
     $minutes=$oldappointment->duration;
     $width=$minutes;
@@ -349,22 +337,13 @@ $past_day=false;
                     
 ?>
               
-  <div 
-
-  
-  title="<?php  echo $title ; ?>" 
+  <div title="<?php  echo $title ; ?>" 
   style="height: <?php  echo $heightpx; unset($heightpx) ?>; width: 80px;" 
   class="<?php  echo $tech_requested_class." ".$status." ".$remove;
     unset($remove); echo " ".$technicinaID."_".$timedata['time_id']; ?>" 
     id="<?php  echo $technicinaID."_".$timedata['time_id'] ; ?>">
-  
-  
-  
-
   <?php   
-  
   unset($status);
-  
     switch ($timedata['status']){
         case 'available':
         if ((!$same_day &&!$past_day )):
@@ -390,27 +369,20 @@ $past_day=false;
            
           endif;          
           break;
-          
-          
           case 'booked':
            ?>  
-           
-           
-           
 <?php 
 
-$tech_member=$timedata['data'];
+ $tech_member=$timedata['data'];
  $oldappointment=(object)$timedata['appointment'];
-
  
+   if ($oldappointment->tech_requested){
+        $tech_requested_class="blue";
+    }else {
+        $tech_requested_class="gray";
+    }
  
- if ($oldappointment->tech_requested){
-    $tech_requested_class="blue";
-}else {
-    $tech_requested_class="gray";
-}
- 
- $from=$oldappointment->interval_time;
+   $from=$oldappointment->interval_time;
  
    $time=strtotime($from);
    
@@ -432,40 +404,23 @@ $tech_member=$timedata['data'];
       
      $title=$firstName." for ".$serviceName." with ".$technicianName." from ".strtoupper($from)." to ".strtoupper($to) ; 
 
-        $appointment_id=$oldappointment->appointment_id;
+     $appointment_id=$oldappointment->appointment_id;
         
     ?>
-           
               <input type="hidden" style="height: 19px;" title="<?php  echo $title; ?>" class="appointment_bt  "
-              
                value="<?php  echo $appointment_id; ?>"/> 
-  
   <label style="float: left;width: 80px;text-align: center;" class="<?php  echo $tech_requested_class; ?>">
    <?php     echo $tech_member[$technicinaID]['member']['firstName'];  ?> 
-  
-  
   </label>
   <input type="hidden" name="" class="serviceID" value="<?php  echo $serviceID; ?>" id="" class="" />
     <input type="hidden" name="" class="date" value="<?php  echo $date; ?>" id="" class="" />
        <?php
-       
-
-       
           break;
     }
-  
-
-  
   $timedata['status'];
-  
-  
    ?>
-  
   <input type="hidden" name="" value="<?php  echo $technicinaID."_".$timedata['time_id'] ; ?>" 
   id="" class="technician_class" />
-  
-  
-  
    </div>  </li>  <?php 
    
    /**
